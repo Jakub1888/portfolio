@@ -1,0 +1,37 @@
+@import '../../../../../apps/client/src/app/styles/mixins.scss';
+@import '../../../../../apps/client/src/app/styles/variables.scss';
+
+.link {
+    font-weight: 600;
+    font-size: 1em;
+    position: relative;
+    transition: all 0.4s;
+    outline: none;
+
+    &:after {
+        bottom: -4px;
+        content: '';
+        display: block;
+        height: 2px;
+        left: 0;
+        position: absolute;
+        opacity: 0.6;
+        transition: width 0.3s ease 0s, opacity 0.3s ease 0s;
+        width: 0;
+    }
+
+    &:hover:after,
+    &:focus:after {
+        width: 100%;
+        opacity: 0.9;
+    }
+}
+
+.active-route {
+    color: red !important;
+    border-bottom: 1px solid red;
+}
+
+.navLink {
+    @include link-colors($c4);
+}

@@ -1,0 +1,8 @@
+<nav class="nav">
+    <img src="assets/svg/logo.svg" class="logo" />
+    <ul class="nav-links">
+        <li class="links-item" *ngFor="let navItem of navList">
+            <portfolio-link [link]="navItem"></portfolio-link>
+        </li>
+    </ul>
+</nav>

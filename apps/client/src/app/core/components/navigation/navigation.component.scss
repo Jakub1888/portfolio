@@ -1,0 +1,32 @@
+@import '../../../styles/variables.scss';
+
+.nav {
+    padding: 1em 2em;
+    height: 5em;
+    width: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: lighten($c1, 3%);
+    border-bottom: 1px solid $c1;
+
+    .nav-links {
+        display: flex;
+    }
+
+    .links-item {
+        padding-right: 1.5em;
+    }
+    .links-item:last-of-type {
+        padding-right: 0;
+    }
+
+    .logo {
+        width: 3em;
+        height: 3em;
+        margin-right: auto;
+
+        filter: invert(71%) sepia(81%) saturate(303%) hue-rotate(147deg)
+            brightness(97%) contrast(95%);
+    }
+}

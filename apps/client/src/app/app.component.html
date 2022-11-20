@@ -1,0 +1,7 @@
+<div class="overlay">
+    <portfolio-navigation></portfolio-navigation>
+
+    <main [@routeAnimations]="prepareRoute(outlet)" class="content">
+        <router-outlet #outlet="outlet"></router-outlet>
+    </main>
+</div>

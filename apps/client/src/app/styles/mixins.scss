@@ -1,0 +1,12 @@
+@mixin link-colors($color) {
+    color: $color;
+
+    &:hover,
+    &:focus {
+        color: lighten($color, 15%);
+    }
+
+    &:after {
+        background: lighten($color, 15%);
+    }
+}

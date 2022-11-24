@@ -1,5 +1,6 @@
 import {
     animate,
+    group,
     query,
     style,
     transition,
@@ -8,28 +9,26 @@ import {
 
 export const fader = trigger('routeAnimations', [
     transition('* <=> *', [
-        query(
-            ':enter, :leave',
-            [
-                style({
-                    position: 'absolute',
-                    left: 0,
-                    width: '100%',
-                    opacity: 0,
-                    transform: 'scale(0) translateY(100%)',
-                }),
-            ],
-            { optional: true }
-        ),
-        query(
-            ':enter',
-            [
-                animate(
-                    '600ms ease',
-                    style({ opacity: 1, transform: 'scale(1) translateY(0)' })
-                ),
-            ],
-            { optional: true }
-        ),
+        query(':enter, :leave', style({ position: 'fixed', opacity: 1 }), {
+            optional: true,
+        }),
+        group([
+            query(
+                ':enter',
+                [
+                    style({ opacity: 0 }),
+                    animate('1200ms ease-in-out', style({ opacity: 1 })),
+                ],
+                { optional: true }
+            ),
+            query(
+                ':leave',
+                [
+                    style({ opacity: 1 }),
+                    animate('800ms ease-in-out', style({ opacity: 0 })),
+                ],
+                { optional: true }
+            ),
+        ]),
     ]),
 ]);

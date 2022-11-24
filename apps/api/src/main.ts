@@ -19,7 +19,7 @@ const port = process.env.port || 3333;
 
 const start = async () => {
     try {
-        await connectDB(process.env.MONGO_URI);
+        // await connectDB(process.env.MONGO_URI);
         app.listen(port, () => {
             return console.log(`Listening at http://localhost:${port}/api`);
         });

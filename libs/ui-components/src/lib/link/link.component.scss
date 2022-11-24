@@ -28,8 +28,17 @@
 }
 
 .active-route {
-    color: red !important;
-    border-bottom: 1px solid red;
+    &:after {
+        bottom: -4px;
+        content: '';
+        display: block;
+        height: 2px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        opacity: 0.9;
+        transition: width 0.3s ease 0s, opacity 0.3s ease 0s;
+    }
 }
 
 .navLink {

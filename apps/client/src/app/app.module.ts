@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AboutMeComponent } from './pages/about-me/about-me.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { ProjectsComponent } from './pages/projects/projects.component';
         NavigationComponent,
         AboutMeComponent,
         ProjectsComponent,
+        HomeComponent,
     ],
     imports: [
         BrowserModule,

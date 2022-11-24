@@ -3,10 +3,10 @@
 
     &:hover,
     &:focus {
-        color: lighten($color, 15%);
+        color: $color;
     }
 
     &:after {
-        background: lighten($color, 15%);
+        background: $color;
     }
 }

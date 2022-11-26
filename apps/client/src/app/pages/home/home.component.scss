@@ -1,0 +1,13 @@
+@import '../../../../src/app/styles/variables.scss';
+@import '../../../../src/app/styles/mixins.scss';
+
+
+:host {
+    section {
+        .home-heading {
+            font-size: 4em;
+        }
+        margin-bottom: 5em;
+    }
+    @include section-transition(translateX(100%), translateX(0));
+}

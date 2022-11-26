@@ -10,3 +10,40 @@
         background: $color;
     }
 }
+
+@mixin section-transition($axisShow, $axisHide) {
+    section {
+        display: grid;
+        place-items: center;
+        align-content: center;
+        min-height: 100vh;
+        font-weight: 700;
+        font-size: 1.2em;
+        text-align: center;
+        margin: 0;
+
+        .section-heading {
+            font-size: 2em;
+            font-weight: 900;
+        }
+    }
+
+    .hidden {
+        opacity: 0;
+        filter: blur(5px);
+        transform: $axisShow;
+        transition: all 1s;
+    }
+
+    .show {
+        opacity: 1;
+        filter: blur(0);
+        transform: $axisHide;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .hidden {
+            transition: all 1s;
+        }
+    }
+}

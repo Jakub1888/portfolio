@@ -1,39 +1,22 @@
+@import '../../../../src/app/styles/variables.scss';
+@import '../../../../src/app/styles/mixins.scss';
+
+
 :host {
-    section {
-        display: grid;
-        place-items: center;
-        align-content: center;
-        min-height: 80vh;
-    }
-
-    .hidden {
-        opacity: 0;
-        filter: blur(5px);
-        transform: translateX(-100%);
-        transition: all 1s;
-    }
-
-    .show {
-        opacity: 1;
-        filter: blur(0);
-        transform: translateX(0);
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-        .hidden {
-            transition: all 1s;
-        }
-    }
-
+    @include section-transition(translateX(-100%), translateX(0));
+    
     .logos {
         display: flex;
 
         img {
-            width: 5em;
+            width: 6em;
         }
 
         li {
-            padding: 1em;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            padding: 2em;
         }
     }
 
@@ -51,5 +34,9 @@
 
     .logo:nth-child(5) {
         transition-delay: 400ms;
+    }
+
+    .logo:nth-child(6) {
+        transition-delay: 500ms;
     }
 }

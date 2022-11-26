@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
     selector: 'portfolio-about-me',
@@ -6,17 +7,24 @@ import { AfterViewInit, Component, ElementRef } from '@angular/core';
     styleUrls: ['./about-me.component.scss'],
 })
 export class AboutMeComponent implements AfterViewInit {
-    constructor(private readonly element: ElementRef) {}
+    logos: { title: string }[] = [
+        { title: 'TypeScript' },
+        { title: 'Angular' },
+        { title: 'Node.js' },
+        { title: 'MongoDB' },
+        { title: 'GraphQl' },
+        { title: 'Jest' },
+    ];
+
+    constructor(
+        private readonly element: ElementRef,
+        private readonly globalService: GlobalService
+    ) {}
 
     ngAfterViewInit(): void {
         const sectionElements =
             this.element.nativeElement.querySelectorAll('.hidden');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                entry.target.classList.toggle('show', entry.isIntersecting);
-            });
-        });
+        const observer = this.globalService.createObserver();
 
         sectionElements.forEach((el: Element) => observer.observe(el));
     }

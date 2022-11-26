@@ -1,8 +1,11 @@
 <div class="overlay">
-    <portfolio-navigation></portfolio-navigation>
-
-    <main class="content">
+    
+    <main class="content {{darkMode ? 'dark-mode' : 'light-mode'}}">
+        <portfolio-navigation></portfolio-navigation>
+        
+        <mat-slide-toggle [(ngModel)]="darkMode" (toggleChange)="onThemeToggle()"></mat-slide-toggle>
         <!--[@routeAnimations]="prepareRoute(outlet)" -->
         <router-outlet #outlet="outlet"></router-outlet>
     </main>
 </div>
+<div id="particles-js"></div>

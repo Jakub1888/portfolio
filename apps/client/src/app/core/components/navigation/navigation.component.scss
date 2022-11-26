@@ -1,14 +1,14 @@
 @import '../../../styles/variables.scss';
 
 .nav {
+    position: absolute;
     padding: 1em 2em;
-    height: 5em;
-    width: auto;
+    z-index: 10;
+    width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    background: lighten($c1, 3%);
-    border-bottom: 1px solid $c1;
+    border-bottom: 1px solid $c4;
 
     .nav-links {
         display: flex;
@@ -22,11 +22,17 @@
     }
 
     .logo {
+        cursor: pointer;
         width: 3em;
         height: 3em;
         margin-right: auto;
-
+        transition: all .5s;
         filter: invert(71%) sepia(81%) saturate(303%) hue-rotate(147deg)
             brightness(97%) contrast(95%);
+    }
+
+    .logo:hover {
+        filter: invert(61%) sepia(71%) saturate(303%) hue-rotate(137deg)
+            brightness(87%) contrast(85%);
     }
 }

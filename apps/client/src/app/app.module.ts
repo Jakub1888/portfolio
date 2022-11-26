@@ -18,6 +18,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AboutMeComponent } from './pages/about-me/about-me.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { HomeComponent } from './pages/home/home.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GlobalService } from './services/global.service';
 
 @NgModule({
     declarations: [
@@ -32,6 +35,8 @@ import { HomeComponent } from './pages/home/home.component';
         BrowserAnimationsModule,
         HttpClientModule,
         RouterModule,
+        FormsModule,
+        ReactiveFormsModule,
         UiComponentsModule,
         InterfacesModule,
         LayoutModule,
@@ -39,10 +44,11 @@ import { HomeComponent } from './pages/home/home.component';
         MatButtonModule,
         MatSidenavModule,
         MatIconModule,
+        MatSlideToggleModule,
         MatListModule,
         AppRoutingModule,
     ],
-    providers: [],
+    providers: [GlobalService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -10,7 +10,13 @@ import { fader } from './route-animations';
     animations: [fader],
 })
 export class AppComponent {
+    darkMode = true;
+
     constructor(private readonly http: HttpClient) {
+        if (localStorage.getItem('theme')) {
+            this.darkMode = JSON.parse(localStorage.getItem('theme') || '');
+        }
+
         this.http.get('/api').subscribe((resp) => console.log(resp));
     }
 
@@ -20,5 +26,10 @@ export class AppComponent {
             outlet.activatedRouteData &&
             outlet.activatedRouteData['animation']
         );
+    }
+
+    onThemeToggle(): void {
+        this.darkMode = !this.darkMode;
+        localStorage.setItem('theme', JSON.stringify(this.darkMode));
     }
 }

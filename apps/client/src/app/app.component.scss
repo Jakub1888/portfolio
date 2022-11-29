@@ -3,10 +3,26 @@
 .content {
     position: relative;
     animation: gradient 15s ease infinite;
+    transition-duration: 400ms;
+    transition-timing-function: ease-out;
+    height: 100%;
+}
+
+.cursor {
+    width: 60px;
+    height: 60px;
+    border: 1px solid black;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.toggler {
+    z-index: 100;
+    position: absolute;
 }
 
 .dark-mode {
-    color: $c3;
+    color: #ffffff;
     background: linear-gradient(
         -45deg,
         darken($c5, 10%),
@@ -29,6 +45,17 @@
     background-size: 400% 400%;
 }
 
+hr {
+    position: absolute;
+    bottom: 3.5em;
+    left: 2.98em;
+    margin: 0 auto;
+    width: 95%;
+    box-sizing: border-box;
+    border: none;
+    border-top: 1px solid $c5;
+}
+
 @keyframes gradient {
     0% {
         background-position: 0% 50%;
@@ -38,5 +65,21 @@
     }
     100% {
         background-position: 0% 50%;
+    }
+}
+
+.expand {
+    animation: cursorExpand 0.5s forwards;
+}
+
+@keyframes cursorExpand {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(2);
+    }
+    100% {
+        transform: scale(1);
     }
 }

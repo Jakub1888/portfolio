@@ -1,13 +1,18 @@
 @import '../../../../src/app/styles/variables.scss';
 @import '../../../../src/app/styles/mixins.scss';
 
-
 :host {
+    .home-wrapper {
+        margin: 0 auto;
+        width: 50%;
+    }
+
+    @include section-transition(translateX(-100%), translateX(0));
     section {
+        justify-content: center;
+        min-height: 100vh;
         .home-heading {
             font-size: 4em;
         }
-        margin-bottom: 5em;
     }
-    @include section-transition(translateX(100%), translateX(0));
 }

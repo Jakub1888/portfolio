@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import { Book, Logo } from '@portfolio/interfaces';
 import { GlobalService } from '../../services/global.service';
+import { books, logos } from '../static-lists';
 
 @Component({
     selector: 'portfolio-about-me',
@@ -7,19 +9,16 @@ import { GlobalService } from '../../services/global.service';
     styleUrls: ['./about-me.component.scss'],
 })
 export class AboutMeComponent implements AfterViewInit {
-    logos: { title: string }[] = [
-        { title: 'TypeScript' },
-        { title: 'Angular' },
-        { title: 'Node.js' },
-        { title: 'MongoDB' },
-        { title: 'GraphQl' },
-        { title: 'Jest' },
-    ];
+    logos: Logo[];
+    books: Book[];
 
     constructor(
         private readonly element: ElementRef,
         private readonly globalService: GlobalService
-    ) {}
+    ) {
+        this.logos = logos;
+        this.books = books;
+    }
 
     ngAfterViewInit(): void {
         const sectionElements =

@@ -1,15 +1,53 @@
 @import '../../../../src/app/styles/variables.scss';
 @import '../../../../src/app/styles/mixins.scss';
 
-
 :host {
+    .about-wrapper {
+        margin: 0 auto;
+        padding-top: 10em;
+    }
+
+    //section
     @include section-transition(translateX(-100%), translateX(0));
-    
+    section {
+        margin: 4em 0;
+    }
+
+    .surname {
+        color: $c5;
+    }
+
+    .programmer-img {
+        width: 40em;
+    }
+
+    .learning {
+        background-color: $c5;
+        color: $c1;
+    }
+
+    .section-heading {
+        margin-bottom: 0.4em;
+        text-align: left;
+    }
+
+    .section-heading:last-of-type {
+        text-align: center;
+    }
+
+    .description-paragraph {
+        font-size: 0.9em;
+        line-height: 2;
+        font-weight: 400;
+        width: 50em;
+    }
+
+    // Logos
     .logos {
         display: flex;
 
         img {
-            width: 6em;
+            width: 4em;
         }
 
         li {
@@ -38,5 +76,12 @@
 
     .logo:nth-child(6) {
         transition-delay: 500ms;
+    }
+
+    // Learning
+    .learning-lists {
+        h3 {
+            margin: 1em 0;
+        }
     }
 }

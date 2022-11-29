@@ -1,49 +1,53 @@
-<section class="hidden">
-    <h1 class="section-heading">About me</h1>
+<div class="about-wrapper">
+    <section class="hidden">
+        <h1 class="section-heading">Jakub <span class="surname">Krasňan</span></h1>
 
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius
-        finibus sagittis. Nam eget erat mollis, tempor ligula ut, vehicula orci.
-        Nulla facilisi. Mauris pharetra semper vestibulum. Integer consectetur
-        odio posuere suscipit pellentesque. Cras a enim eu nulla scelerisque
-        accumsan vel et nulla. Pellentesque urna diam, fringilla fringilla
-        varius sit amet, facilisis sed justo. Duis mauris tellus, elementum nec
-        tincidunt eu, vestibulum non elit. Mauris vel sagittis dui, eu malesuada
-        tellus. Donec molestie odio tincidunt varius vulputate. Nulla sodales
-        posuere odio, id auctor nulla dignissim et. Donec venenatis lectus nec
-        diam sodales, vehicula lacinia dui accumsan. Aliquam varius cursus odio
-        a suscipit. Suspendisse accumsan dui vel ligula pulvinar dictum.
-        Praesent convallis mi sit amet tempor facilisis. Praesent semper nec
-        odio id egestas.
-    </p>
-</section>
+        <p class="description-paragraph">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius finibus sagittis. Nam
+            eget erat mollis, tempor ligula ut, vehicula orci. Nulla facilisi. Mauris pharetra
+            semper vestibulum. Integer consectetur odio posuere suscipit pellentesque. Cras a enim
+            eu nulla scelerisque accumsan vel et nulla. Pellentesque urna diam, fringilla fringilla
+            varius sit amet, facilisis sed justo. Duis mauris tellus, elementum nec tincidunt eu,
+            vestibulum non elit.
+        </p>
+        <img
+            fill="red"
+            class="programmer-img"
+            src="assets/svg/programmer.svg"
+            alt="An image of programmer"
+        />
+    </section>
 
-<section class="hidden">
-    <h1 class="section-heading">Technologies I like to play with</h1>
+    <section class="learning">
+        <div class="hidden">
+            <h1 class="section-heading">My Learning</h1>
 
-    <ul class="logos">
-        <li *ngFor="let logo of logos" class="logo hidden">
-            <img src="assets/svg/{{logo.title}}.svg" alt="{{logo.title}} logo">
-            <span class="logo-title">{{logo.title}}</span>
-        </li>
-    </ul>
-</section>
+            <p class="description-paragraph">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius finibus sagittis.
+                Nam eget erat mollis, tempor ligula ut, vehicula orci. Nulla facilisi.
+            </p>
 
-<section class="hidden">
-    <h1 class="section-heading">My Learning</h1>
+            <div class="learning-lists">
+                <h3>Reading</h3>
+                <ul class="books">
+                    <li *ngFor="let book of books">
+                        <a href="{{ book.url }}">{{ book.title }}</a> -
+                        {{ book.author }}
+                        <span>{{ book.description }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius
-        finibus sagittis. Nam eget erat mollis, tempor ligula ut, vehicula orci.
-        Nulla facilisi.
-    </p>
+    <section class="hidden">
+        <h1 class="section-heading">Technologies I like to play with</h1>
 
-    <div class="learning-lists">
-
-        <h3>Reading</h3>
-        <ul>
-            <li>Pragmatic Programmer - Andy Hunt, Dave Thomas</li>
-            <li>Clean Code - Robert Cecil Martin</li>
+        <ul class="logos">
+            <li *ngFor="let logo of logos" class="logo hidden">
+                <img src="assets/svg/{{ logo.title }}.svg" alt="{{ logo.title }} logo" />
+                <span class="logo-title">{{ logo.title }}</span>
+            </li>
         </ul>
-    </div>
-</section>
+    </section>
+</div>

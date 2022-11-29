@@ -1,0 +1,35 @@
+@import '../../../styles/variables.scss';
+
+:host {
+    .socials {
+        position: fixed;
+        bottom: 0;
+        left: 2em;
+        z-index: 999;
+        margin-bottom: 2.3em;
+    }
+
+    .socials-img {
+        width: 2em;
+    }
+
+    .socials-item {
+        padding-bottom: 1.2em;
+    }
+
+    li:last-of-type::after {
+        content: '';
+        display: block;
+        width: 1px;
+        margin: 0px auto;
+        background-color: $c5;
+        height: 5em;
+        margin-top: 1em;
+    }
+
+    @media screen and (max-width: 1050px) {
+        .socials {
+            display: none;
+        }
+    }
+}

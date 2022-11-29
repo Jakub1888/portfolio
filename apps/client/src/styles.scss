@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap');
 
+//stop animations during window resize
+.resize-animation-stopper * {
+    animation: none !important;
+    transition: none !important;
+}
 /*
   1. Use a more-intuitive box-sizing model.
 */
@@ -27,9 +32,11 @@ body {
     5. Improve text rendering
   */
 body {
-    font-family: 'Source Sans Pro', sans-serif;;
+    font-family: 'Source Sans Pro', sans-serif;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    cursor: url('./assets/svg/cursor.svg'), auto;
+    overflow-x: hidden;
 }
 /*
     6. Improve media defaults

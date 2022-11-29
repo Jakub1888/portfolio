@@ -21,6 +21,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GlobalService } from './services/global.service';
+import { SocialsComponent } from './core/components/socials/socials.component';
 
 @NgModule({
     declarations: [
@@ -29,9 +30,10 @@ import { GlobalService } from './services/global.service';
         AboutMeComponent,
         ProjectsComponent,
         HomeComponent,
+        SocialsComponent
     ],
     imports: [
-        BrowserModule,
+        BrowserModule.withServerTransition({ appId: 'serverApp' }),
         BrowserAnimationsModule,
         HttpClientModule,
         RouterModule,
@@ -46,9 +48,9 @@ import { GlobalService } from './services/global.service';
         MatIconModule,
         MatSlideToggleModule,
         MatListModule,
-        AppRoutingModule,
+        AppRoutingModule
     ],
     providers: [GlobalService],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}

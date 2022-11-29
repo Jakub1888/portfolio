@@ -5,6 +5,8 @@ import mongoose from 'mongoose';
 import { config } from './config/config';
 import Logging from './library/logging';
 import * as path from 'path';
+import authorRoutes from './routes/Author';
+import bookRoutes from './routes/Book';
 
 const router = express();
 
@@ -27,10 +29,14 @@ export const connectDB = async () => {
 const StartServer = () => {
     router.use((req: Request, res: Response, next: NextFunction) => {
         /** Log the request */
-        Logging.info(`Incoming -> Method: [${req.method}] - Url: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
+        Logging.info(
+            `Incoming -> Method: [${req.method}] - Url: [${req.url}] - IP: [${req.socket.remoteAddress}]`
+        );
 
         res.on('finish', () => {
-            Logging.info(`Incoming -> Method: [${req.method}] - Url: [${req.url}] - IP: [${req.socket.remoteAddress}] - Status [${res.statusCode}]`);
+            Logging.info(
+                `Incoming -> Method: [${req.method}] - Url: [${req.url}] - IP: [${req.socket.remoteAddress}] - Status [${res.statusCode}]`
+            );
         });
 
         next();
@@ -42,7 +48,10 @@ const StartServer = () => {
     /** Api Rules */
     router.use((req: Request, res: Response, next: NextFunction) => {
         res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+        res.header(
+            'Access-Control-Allow-Headers',
+            'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+        );
 
         if (req.method == 'Options') {
             res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
@@ -53,9 +62,13 @@ const StartServer = () => {
     });
 
     /** Routes */
+    router.use('/api/authors', authorRoutes);
+    router.use('/api/books', bookRoutes);
 
     /** Healthcheck */
-    router.get('/ping', (req: Request, res: Response, next: NextFunction) => res.status(200).json({ message: 'pong' }));
+    router.get('/api/ping', (req: Request, res: Response, next: NextFunction) =>
+        res.status(200).json({ message: 'pong' })
+    );
 
     /** Error handling */
     router.use((req: Request, res: Response, next: NextFunction) => {
@@ -65,5 +78,7 @@ const StartServer = () => {
         return res.status(404).json({ message: error.message });
     });
 
-    http.createServer(router).listen(config.server.port, () => Logging.info(`Server is running on port ${config.server.port}`));
+    http.createServer(router).listen(config.server.port, () =>
+        Logging.info(`Server is running on port ${config.server.port}`)
+    );
 };

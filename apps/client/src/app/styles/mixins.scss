@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 @mixin link-colors($color) {
     color: $color;
 
@@ -13,18 +15,17 @@
 
 @mixin section-transition($axisShow, $axisHide) {
     section {
-        display: grid;
-        place-items: center;
-        align-content: center;
-        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 50vh;
         font-weight: 700;
         font-size: 1.2em;
-        text-align: center;
         margin: 0;
 
         .section-heading {
-            font-size: 2em;
-            font-weight: 900;
+            font-size: 3em;
+            font-weight: 700;
         }
     }
 

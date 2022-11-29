@@ -6,6 +6,7 @@ export const logos: Logo[] = [
     { title: 'Node.js' },
     { title: 'MongoDB' },
     { title: 'GraphQl' },
+    { title: 'Docker' },
     { title: 'Jest' },
 ];
 

@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
 import { fader } from './route-animations';
+import { GlobalService } from './services/global.service';
 
 @Component({
     selector: 'portfolio-root',
@@ -10,15 +11,16 @@ import { fader } from './route-animations';
     animations: [fader]
 })
 export class AppComponent implements AfterViewInit {
-    darkMode = true;
+    darkMode = false;
     resizeTimer: string | number | NodeJS.Timeout | undefined;
 
-    constructor(private readonly http: HttpClient, private elem: ElementRef) {
+    constructor(private readonly http: HttpClient, private readonly globalService: GlobalService) {
         if (localStorage.getItem('theme')) {
             this.darkMode = JSON.parse(localStorage.getItem('theme') || '');
+            this.globalService.setColorTheme(this.darkMode);
         }
 
-        this.http.get('api/ping').subscribe((resp) => console.log(resp));
+        // this.http.get('api/ping').subscribe((resp) => console.log(resp));
     }
 
     ngAfterViewInit(): void {
@@ -29,31 +31,15 @@ export class AppComponent implements AfterViewInit {
                 document.body.classList.remove('resize-animation-stopper');
             }, 400);
         });
-
-        const cursor = this.elem.nativeElement.querySelector('.cursor');
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.setAttribute(
-                'style',
-                'top: ' + (e.pageY - 28) + 'px; left: ' + (e.pageX - 28) + 'px;'
-            );
-        });
-
-        document.addEventListener('click', () => {
-            cursor.classList.add('expand');
-
-            setTimeout(() => {
-                cursor.classList.remove('expand');
-            }, 500);
-        });
     }
 
     prepareRoute(outlet: RouterOutlet) {
         return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
     }
 
-    onThemeToggle(): void {
-        this.darkMode = !this.darkMode;
+    onThemeToggle(darkMode: boolean): void {
+        this.darkMode = !darkMode;
+        this.globalService.setColorTheme(this.darkMode);
         localStorage.setItem('theme', JSON.stringify(this.darkMode));
     }
 }

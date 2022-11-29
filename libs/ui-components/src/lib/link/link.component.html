@@ -1,8 +1,18 @@
 <a
+    *ngIf="link.routerLink"
     routerLink="{{ link.routerLink }}"
-    href="{{ link.href }}"
     class="link {{ link.class }}"
     routerLinkActive="active-route"
+>
+    {{ link.title }}
+</a>
+
+<a
+    *ngIf="link.href"
+    href="{{link.href}}"
+    class="{{ link.class }}"
+    target="_blank"
+    rel="noopener noreferrer"
 >
     {{ link.title }}
 </a>

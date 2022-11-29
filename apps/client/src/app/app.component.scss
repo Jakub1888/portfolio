@@ -3,17 +3,8 @@
 .content {
     position: relative;
     animation: gradient 15s ease infinite;
-    transition-duration: 400ms;
-    transition-timing-function: ease-out;
     height: 100%;
-}
-
-.cursor {
-    width: 60px;
-    height: 60px;
-    border: 1px solid black;
-    border-radius: 50%;
-    position: absolute;
+    overflow: hidden;
 }
 
 .toggler {
@@ -22,13 +13,13 @@
 }
 
 .dark-mode {
-    color: #ffffff;
+    color: $c3;
     background: linear-gradient(
         -45deg,
-        darken($c5, 10%),
-        darken($c5, 20%),
         lighten($c2, 10%),
-        lighten($c2, 10%)
+        lighten($c2, 5%),
+        lighten($c2, 15%),
+        $c2
     );
     background-size: 400% 400%;
 }
@@ -37,23 +28,23 @@
     color: $c2;
     background: linear-gradient(
         -45deg,
-        darken($c3, 10%),
-        darken($c3, 20%),
-        lighten($c4, 10%),
-        lighten($c4, 10%)
+        lighten($c3, 35%),
+        lighten($c3, 10%),
+        lighten($c3, 30%),
+        lighten($c3, 15%),
     );
     background-size: 400% 400%;
 }
 
 hr {
     position: absolute;
-    bottom: 3.5em;
+    bottom: 3.51em;
     left: 2.98em;
     margin: 0 auto;
     width: 95%;
     box-sizing: border-box;
     border: none;
-    border-top: 1px solid $c5;
+    border-top: 2px solid $c5;
 }
 
 @keyframes gradient {
@@ -68,18 +59,9 @@ hr {
     }
 }
 
-.expand {
-    animation: cursorExpand 0.5s forwards;
-}
-
-@keyframes cursorExpand {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(2);
-    }
-    100% {
-        transform: scale(1);
-    }
+.theme-toggler {
+    z-index: 100;
+    position: absolute;
+    top: 1%;
+    right: 80%;
 }

@@ -4,42 +4,48 @@
 :host {
     .about-wrapper {
         margin: 0 auto;
-        padding-top: 10em;
     }
 
     //section
     @include section-transition(translateX(-100%), translateX(0));
-    section {
-        margin: 4em 0;
+    .welcome {
+        height: 95vh;
+        justify-content: flex-end;
+        align-items: center;
     }
 
-    .surname {
+    .container {
+        max-width: 50em;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .firstname {
         color: $c5;
     }
 
     .programmer-img {
         width: 40em;
+        margin-top: 1em;
     }
 
     .learning {
-        background-color: $c5;
-        color: $c1;
+        background-color: $c2;
+        color: $c3;
     }
 
-    .section-heading {
-        margin-bottom: 0.4em;
-        text-align: left;
-    }
-
-    .section-heading:last-of-type {
+    .main-heading {
         text-align: center;
+        margin-bottom: 0.2em;
+        width: 100%;
+        font-size: 4em;
     }
 
     .description-paragraph {
-        font-size: 0.9em;
+        font-size: 1em;
         line-height: 2;
-        font-weight: 400;
-        width: 50em;
+        font-weight: 600;
+        text-align: center;
     }
 
     // Logos
@@ -58,30 +64,15 @@
         }
     }
 
-    .logo:nth-child(2) {
-        transition-delay: 100ms;
-    }
 
-    .logo:nth-child(3) {
-        transition-delay: 200ms;
-    }
-
-    .logo:nth-child(4) {
-        transition-delay: 300ms;
-    }
-
-    .logo:nth-child(5) {
-        transition-delay: 400ms;
-    }
-
-    .logo:nth-child(6) {
-        transition-delay: 500ms;
+    @for $i from 2 through 7 {
+        .logo:nth-child(1n + #{$i}) {
+            transition-delay: $i * 100ms;
+        }
     }
 
     // Learning
     .learning-lists {
-        h3 {
-            margin: 1em 0;
-        }
+        
     }
 }

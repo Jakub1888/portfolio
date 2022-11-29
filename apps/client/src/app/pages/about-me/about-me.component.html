@@ -1,21 +1,21 @@
 <div class="about-wrapper">
-    <section class="hidden">
-        <h1 class="section-heading">Jakub <span class="surname">Krasňan</span></h1>
+    <section class="welcome">
+        <div class="container">
+            <h1 class="main-heading">Hello there.</h1>
 
-        <p class="description-paragraph">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius finibus sagittis. Nam
-            eget erat mollis, tempor ligula ut, vehicula orci. Nulla facilisi. Mauris pharetra
-            semper vestibulum. Integer consectetur odio posuere suscipit pellentesque. Cras a enim
-            eu nulla scelerisque accumsan vel et nulla. Pellentesque urna diam, fringilla fringilla
-            varius sit amet, facilisis sed justo. Duis mauris tellus, elementum nec tincidunt eu,
-            vestibulum non elit.
-        </p>
-        <img
-            fill="red"
-            class="programmer-img"
-            src="assets/svg/programmer.svg"
-            alt="An image of programmer"
-        />
+            <p class="description-paragraph">
+                My name is <span class="firstname">Jakub</span> Krasňan. Frontend Developer with
+                interest in building scalable and well-organised applications.
+            </p>
+            <p class="description-paragraph">Also a fan of anything JavaScript related.</p>
+            <img
+                class="programmer-img"
+                src="{{
+                    darkTheme ? 'assets/svg/programmer.svg' : 'assets/svg/programmer-day.svg'
+                }}"
+                alt="An image of programmer"
+            />
+        </div>
     </section>
 
     <section class="learning">
@@ -31,8 +31,26 @@
                 <h3>Reading</h3>
                 <ul class="books">
                     <li *ngFor="let book of books">
+                        <portfolio-link
+                            [link]="{ title: book.title, class: '', href: book.url }"
+                        ></portfolio-link>
+                        <span>{{ book.description  }}</span>
+                    </li>
+                </ul>
+                <h3>Udemy</h3>
+                <ul class="books">
+                    <li *ngFor="let book of books">
                         <a href="{{ book.url }}">{{ book.title }}</a> -
                         {{ book.author }}
+                        <span>{{ book.description }}</span>
+                    </li>
+                </ul>
+                <h3>Other</h3>
+                <ul class="books">
+                    <li *ngFor="let book of books">
+                        
+
+                        
                         <span>{{ book.description }}</span>
                     </li>
                 </ul>
@@ -41,7 +59,7 @@
     </section>
 
     <section class="hidden">
-        <h1 class="section-heading">Technologies I like to play with</h1>
+        <h1 class="section-heading">Technologies I like to use</h1>
 
         <ul class="logos">
             <li *ngFor="let logo of logos" class="logo hidden">

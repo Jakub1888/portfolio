@@ -1,16 +1,14 @@
 <div class="overlay">
     <main class="content {{ darkMode ? 'dark-mode' : 'light-mode' }}">
-        <mat-slide-toggle
-            class="toggler"
-            [(ngModel)]="darkMode"
-            (toggleChange)="onThemeToggle()"
-        ></mat-slide-toggle>
         <portfolio-navigation></portfolio-navigation>
+        <portfolio-toggler
+            class="theme-toggler"
+            (themeToggle)="onThemeToggle($event)"
+        ></portfolio-toggler>
 
         <!--[@routeAnimations]="prepareRoute(outlet)" -->
         <router-outlet #outlet="outlet"></router-outlet>
         <portfolio-socials></portfolio-socials>
         <hr />
     </main>
-    <div class="cursor"></div>
 </div>

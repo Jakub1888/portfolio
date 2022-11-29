@@ -11,6 +11,7 @@ import { books, logos } from '../static-lists';
 export class AboutMeComponent implements AfterViewInit {
     logos: Logo[];
     books: Book[];
+    darkTheme = false;
 
     constructor(
         private readonly element: ElementRef,
@@ -18,6 +19,10 @@ export class AboutMeComponent implements AfterViewInit {
     ) {
         this.logos = logos;
         this.books = books;
+
+        this.globalService.getColorTheme().subscribe((theme: boolean) => {
+            this.darkTheme = theme
+        })
     }
 
     ngAfterViewInit(): void {

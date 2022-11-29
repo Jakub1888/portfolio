@@ -8,7 +8,6 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    border-bottom: 1px solid $c4;
 
     .nav-links {
         display: flex;
@@ -26,8 +25,8 @@
         height: 3em;
         margin-right: auto;
         transition: all 0.5s;
-        filter: invert(71%) sepia(81%) saturate(303%) hue-rotate(147deg) brightness(97%)
-            contrast(95%);
+        filter: invert(61%) sepia(71%) saturate(303%) hue-rotate(137deg) brightness(87%)
+            contrast(85%);
     }
 
     .logo:hover {

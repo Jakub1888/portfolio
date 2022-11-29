@@ -20,7 +20,7 @@
     li:last-of-type::after {
         content: '';
         display: block;
-        width: 1px;
+        width: 2px;
         margin: 0px auto;
         background-color: $c5;
         height: 5em;

@@ -1,8 +1,19 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
+    standalone: true,
+    imports: [CommonModule, FormsModule],
     selector: 'portfolio-toggler',
-    templateUrl: './toggler.component.html',
+    template: `
+        <input
+            (ngModelChange)="onThemeToggle()"
+            [(ngModel)]="model"
+            type="checkbox"
+            id="switch"
+        /><label for="switch">Toggle</label>
+    `,
     styleUrls: ['./toggler.component.scss']
 })
 export class TogglerComponent {

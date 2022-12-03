@@ -9,15 +9,8 @@
     //section
     @include section-transition(translateX(-100%), translateX(0));
     .welcome {
-        height: 95vh;
-        justify-content: flex-end;
-        align-items: center;
-    }
-
-    .container {
-        max-width: 50em;
-        display: flex;
-        flex-direction: column;
+        margin: 7em 0 0 0;
+        height: 100%;
     }
 
     .firstname {
@@ -32,6 +25,8 @@
     .learning {
         background-color: $c2;
         color: $c3;
+        padding: 5em 0;
+        margin: 7em 0 0 0;
     }
 
     .main-heading {
@@ -64,7 +59,6 @@
         }
     }
 
-
     @for $i from 2 through 7 {
         .logo:nth-child(1n + #{$i}) {
             transition-delay: $i * 100ms;
@@ -73,6 +67,5 @@
 
     // Learning
     .learning-lists {
-        
     }
 }

@@ -4,31 +4,42 @@ import {
     query,
     style,
     transition,
-    trigger,
+    trigger
 } from '@angular/animations';
 
-export const fader = trigger('routeAnimations', [
-    transition('* <=> *', [
-        query(':enter, :leave', style({ position: 'fixed', opacity: 1 }), {
-            optional: true,
-        }),
+export const slider = trigger('routeAnimations', [
+    transition('* => isLeft', slideTo('left')),
+    transition('* => isRight', slideTo('right')),
+    transition('isRight => *', slideTo('left')),
+    transition('isLeft => *', slideTo('right'))
+]);
+
+function slideTo(direction: string) {
+    const optional = { optional: true };
+
+    return [
+        query(
+            ':enter, :leave',
+            [
+                style({
+                    position: 'absolute',
+                    top: 0,
+                    [direction]: 0,
+                    width: '100%'
+                })
+            ],
+            optional
+        ),
+        query(':enter', [style({ [direction]: '-100%' })]),
         group([
             query(
-                ':enter',
-                [
-                    style({ opacity: 0 }),
-                    animate('1200ms ease-in-out', style({ opacity: 1 })),
-                ],
-                { optional: true }
-            ),
-            query(
                 ':leave',
-                [
-                    style({ opacity: 1 }),
-                    animate('800ms ease-in-out', style({ opacity: 0 })),
-                ],
-                { optional: true }
+                [animate('600ms ease', style({ [direction]: '100%' }))],
+                optional
             ),
-        ]),
-    ]),
-]);
+            query(':enter', [
+                animate('600ms ease', style({ [direction]: '0%' }))
+            ])
+        ])
+    ];
+}

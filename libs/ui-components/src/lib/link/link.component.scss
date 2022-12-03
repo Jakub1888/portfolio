@@ -44,3 +44,7 @@
 .navLink {
     @include link-colors($c4);
 }
+
+.learningLink {
+    @include link-colors($c5);
+}

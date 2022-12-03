@@ -33,4 +33,9 @@
         filter: invert(61%) sepia(71%) saturate(303%) hue-rotate(137deg) brightness(87%)
             contrast(85%);
     }
+
+    .theme-toggler {
+        position: relative;
+        top: -20px;
+    }
 }

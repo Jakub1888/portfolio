@@ -1,0 +1,9 @@
+@import '../../../../src/app/styles/variables.scss';
+@import '../../../../src/app/styles/mixins.scss';
+
+:host {
+    @include section-transition(translateX(-100%), translateX(0));
+    section {
+        height: 100vh;
+    }
+}

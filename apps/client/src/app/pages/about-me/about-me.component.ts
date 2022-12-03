@@ -6,28 +6,24 @@ import { books, logos } from '../static-lists';
 @Component({
     selector: 'portfolio-about-me',
     templateUrl: './about-me.component.html',
-    styleUrls: ['./about-me.component.scss'],
+    styleUrls: ['./about-me.component.scss']
 })
 export class AboutMeComponent implements AfterViewInit {
     logos: Logo[];
     books: Book[];
     darkTheme = false;
 
-    constructor(
-        private readonly element: ElementRef,
-        private readonly globalService: GlobalService
-    ) {
+    constructor(private readonly element: ElementRef, private readonly globalService: GlobalService) {
         this.logos = logos;
         this.books = books;
 
         this.globalService.getColorTheme().subscribe((theme: boolean) => {
-            this.darkTheme = theme
-        })
+            this.darkTheme = theme;
+        });
     }
 
     ngAfterViewInit(): void {
-        const sectionElements =
-            this.element.nativeElement.querySelectorAll('.hidden');
+        const sectionElements = this.element.nativeElement.querySelectorAll('.hidden');
         const observer = this.globalService.createObserver();
 
         sectionElements.forEach((el: Element) => observer.observe(el));

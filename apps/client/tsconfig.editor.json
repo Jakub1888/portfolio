@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "../../libs/tests/src/lib/client-tests/app.component.spec.ts"],
   "compilerOptions": {
     "types": ["jest", "node"]
   }

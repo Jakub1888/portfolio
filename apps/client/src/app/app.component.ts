@@ -1,25 +1,42 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
-import { fader } from './route-animations';
+import { slider } from './route-animations';
 import { GlobalService } from './services/global.service';
 
 @Component({
     selector: 'portfolio-root',
-    templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    animations: [fader]
+    animations: [slider],
+    template: `
+        <div class="overlay {{ darkMode ? 'dark-mode' : 'light-mode' }}">
+            <main class="content " [@routeAnimations]="prepareRoute(outlet)">
+                <portfolio-navigation></portfolio-navigation>
+
+                <!--[@routeAnimations]="prepareRoute(outlet)" -->
+                <router-outlet #outlet="outlet"></router-outlet>
+                <portfolio-socials></portfolio-socials>
+                <hr />
+            </main>
+        </div>
+    `
 })
 export class AppComponent implements AfterViewInit {
     darkMode = false;
     resizeTimer: string | number | NodeJS.Timeout | undefined;
 
-    constructor(private readonly http: HttpClient, private readonly globalService: GlobalService) {
+    constructor(
+        private readonly http: HttpClient,
+        private readonly globalService: GlobalService
+    ) {
         if (localStorage.getItem('theme')) {
             this.darkMode = JSON.parse(localStorage.getItem('theme') || '');
             this.globalService.setColorTheme(this.darkMode);
         }
 
+        this.globalService.getColorTheme().subscribe((theme: boolean) => {
+            this.darkMode = theme;
+        });
         // this.http.get('api/ping').subscribe((resp) => console.log(resp));
     }
 
@@ -34,12 +51,10 @@ export class AppComponent implements AfterViewInit {
     }
 
     prepareRoute(outlet: RouterOutlet) {
-        return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
-    }
-
-    onThemeToggle(darkMode: boolean): void {
-        this.darkMode = !darkMode;
-        this.globalService.setColorTheme(this.darkMode);
-        localStorage.setItem('theme', JSON.stringify(this.darkMode));
+        return (
+            outlet &&
+            outlet.activatedRouteData &&
+            outlet.activatedRouteData['animation']
+        );
     }
 }

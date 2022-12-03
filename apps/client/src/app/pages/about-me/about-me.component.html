@@ -19,12 +19,11 @@
     </section>
 
     <section class="learning">
-        <div class="hidden">
+        <div class="hidden learning-innter">
             <h1 class="section-heading">My Learning</h1>
 
             <p class="description-paragraph">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius finibus sagittis.
-                Nam eget erat mollis, tempor ligula ut, vehicula orci. Nulla facilisi.
+                As a self-taught developer I understand the need of 
             </p>
 
             <div class="learning-lists">
@@ -32,7 +31,7 @@
                 <ul class="books">
                     <li *ngFor="let book of books">
                         <portfolio-link
-                            [link]="{ title: book.title, class: '', href: book.url }"
+                            [link]="{ title: book.title, class: 'learningLink', href: book.url }"
                         ></portfolio-link>
                         <span>{{ book.description  }}</span>
                     </li>

@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap');
+@import 'ngx-toastr/toastr';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 //stop animations during window resize
 .resize-animation-stopper * {

@@ -1,41 +1,24 @@
 <div class="about-wrapper">
-    <section class="welcome">
-        <div class="container">
-            <h1 class="main-heading">Hello there.</h1>
+    <section class="hidden">
+        <h1 class="section-heading">About Me</h1>
 
-            <p class="description-paragraph">
-                My name is <span class="firstname">Jakub</span> Krasňan. Frontend Developer with
-                interest in building scalable and well-organised applications.
-            </p>
-            <p class="description-paragraph">Also a fan of anything JavaScript related.</p>
-            <img
-                class="programmer-img"
-                src="{{
-                    darkTheme ? 'assets/svg/programmer.svg' : 'assets/svg/programmer-day.svg'
-                }}"
-                alt="An image of programmer"
-            />
-        </div>
+        <p class="description-paragraph">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula erat quam, et porttitor lacus hendrerit
+            ac. Duis nibh purus, laoreet sit amet volutpat ut, ullamcorper non felis. Aenean nec nulla et massa
+            elementum volutpat. Phasellus quis metus in sem accumsan mattis. Vivamus in mauris ut odio accumsan ornare.
+        </p>
     </section>
 
     <section class="learning">
-        <div class="hidden learning-innter">
+        <div class="hidden learning-inner">
             <h1 class="section-heading">My Learning</h1>
 
-            <p class="description-paragraph">
-                As a self-taught developer I understand the need of 
-            </p>
+            <p class="description-paragraph">As a self-taught developer I understand the need of</p>
 
             <div class="learning-lists">
                 <h3>Reading</h3>
-                <ul class="books">
-                    <li *ngFor="let book of books">
-                        <portfolio-link
-                            [link]="{ title: book.title, class: 'learningLink', href: book.url }"
-                        ></portfolio-link>
-                        <span>{{ book.description  }}</span>
-                    </li>
-                </ul>
+                <portfolio-learning-card [learningList]="books"></portfolio-learning-card>
+
                 <h3>Udemy</h3>
                 <ul class="books">
                     <li *ngFor="let book of books">
@@ -47,9 +30,6 @@
                 <h3>Other</h3>
                 <ul class="books">
                     <li *ngFor="let book of books">
-                        
-
-                        
                         <span>{{ book.description }}</span>
                     </li>
                 </ul>

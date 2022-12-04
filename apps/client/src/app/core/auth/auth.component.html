@@ -1,0 +1,47 @@
+<section class="auth">
+    <div *ngIf="!authChoiceChoosen">
+        <p>
+            To view projects please login
+            <button class="auth-action" type="button" mat-button (click)="chooseAuthOption('login')">Login</button>
+        </p>
+
+        <p>
+            If you don't have account yet
+            <button class="auth-action" type="button" mat-button (click)="chooseAuthOption('register')">
+                Register
+            </button>
+        </p>
+
+        <p>
+            Or you can use a pre-created test account
+            <button class="auth-action" type="button" mat-button (click)="chooseAuthOption('register')">
+                Login as test user
+            </button>
+        </p>
+    </div>
+
+    <form class="auth-form" [formGroup]="authForm" (submit)="onSubmit()" *ngIf="authChoiceChoosen">
+        <h2>{{ authChoice | uppercase }}</h2>
+
+        <mat-form-field class="input-full-width">
+            <mat-label>Username</mat-label>
+            <input class="auth-input" matInput placeholder="Username" type="text" formControlName="username" />
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+            <mat-label>Password</mat-label>
+            <input class="auth-input" type="password" matInput placeholder="Password" formControlName="password" />
+        </mat-form-field>
+
+        <button mat-raised-button type="submit">Submit</button>
+
+        <button
+            class="auth-action"
+            type="button"
+            mat-button
+            (click)="chooseAuthOption(authChoice === 'login' ? 'register' : 'login')"
+        >
+            {{ authChoice === 'login' ? "Don't have account yet? Register" : 'Already registered? Login' }}
+        </button>
+    </form>
+</section>

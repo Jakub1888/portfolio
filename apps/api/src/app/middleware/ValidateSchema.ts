@@ -1,7 +1,7 @@
+import { IUserWithBooks } from '@portfolio/interfaces';
 import { NextFunction, Request, Response } from 'express';
 import Joi, { ObjectSchema } from 'joi';
 import Logging from '../library/logging';
-import { IAuthor } from '../models/Author';
 import { IBook } from '../models/Book';
 
 export const ValidateSchema = (schema: ObjectSchema) => {
@@ -18,23 +18,22 @@ export const ValidateSchema = (schema: ObjectSchema) => {
 };
 
 export const Schemas = {
-    author: {
-        create: Joi.object<IAuthor>({
-            name: Joi.string().required()
+    user: {
+        create: Joi.object<IUserWithBooks>({
+            username: Joi.string().required(),
+            password: Joi.string().min(6).alphanum().required()
         }),
-        update: Joi.object<IAuthor>({
-            name: Joi.string().required()
+        update: Joi.object<IUserWithBooks>({
+            username: Joi.string().required(),
+            password: Joi.string().min(6).alphanum().required()
         })
     },
     book: {
         create: Joi.object<IBook>({
-            author: Joi.string()
-                .regex(/^[0-9a-fA-F]{24}$/)
-                .required(),
             title: Joi.string().required()
         }),
         update: Joi.object<IBook>({
-            author: Joi.string()
+            user: Joi.string()
                 .regex(/^[0-9a-fA-F]{24}$/)
                 .required(),
             title: Joi.string().required()

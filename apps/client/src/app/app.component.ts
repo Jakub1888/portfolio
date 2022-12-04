@@ -3,14 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
 import { slider } from './route-animations';
 import { GlobalService } from './services/global.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
     selector: 'portfolio-root',
     styleUrls: ['./app.component.scss'],
     animations: [slider],
     template: `
-        <div class="overlay {{ darkMode ? 'dark-mode' : 'light-mode' }}">
-            <main class="content " [@routeAnimations]="prepareRoute(outlet)">
+        <div class="overlay">
+            <main class="content {{ darkMode ? 'dark-mode' : 'light-mode' }}">
                 <portfolio-navigation></portfolio-navigation>
 
                 <!--[@routeAnimations]="prepareRoute(outlet)" -->
@@ -27,7 +28,8 @@ export class AppComponent implements AfterViewInit {
 
     constructor(
         private readonly http: HttpClient,
-        private readonly globalService: GlobalService
+        private readonly globalService: GlobalService,
+        private readonly authService: AuthService
     ) {
         if (localStorage.getItem('theme')) {
             this.darkMode = JSON.parse(localStorage.getItem('theme') || '');
@@ -37,10 +39,13 @@ export class AppComponent implements AfterViewInit {
         this.globalService.getColorTheme().subscribe((theme: boolean) => {
             this.darkMode = theme;
         });
-        // this.http.get('api/ping').subscribe((resp) => console.log(resp));
     }
 
     ngAfterViewInit(): void {
+        this.preventAnimationsOnWindowResize();
+    }
+
+    preventAnimationsOnWindowResize(): void {
         window.addEventListener('resize', () => {
             document.body.classList.add('resize-animation-stopper');
             clearTimeout(this.resizeTimer);
@@ -50,11 +55,7 @@ export class AppComponent implements AfterViewInit {
         });
     }
 
-    prepareRoute(outlet: RouterOutlet) {
-        return (
-            outlet &&
-            outlet.activatedRouteData &&
-            outlet.activatedRouteData['animation']
-        );
+    prepareRoute(outlet: RouterOutlet): void {
+        return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
     }
 }

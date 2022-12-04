@@ -2,19 +2,40 @@
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import Book from '../models/Book';
+import User from '../models/User';
 
-const createBook = (req: Request, res: Response, next: NextFunction) => {
-    const { title, author } = req.body;
+export interface Req extends Request {
+    userId: string;
+}
+
+const createBook = (req: Req, res: Response, next: NextFunction) => {
+    const { title } = req.body;
+    let creator;
+    console.log(req.userId);
 
     const book = new Book({
         _id: new mongoose.Types.ObjectId(),
         title,
-        author
+        user: req.userId
     });
 
     return book
         .save()
-        .then((book) => res.status(201).json({ book }))
+        .then((book) => {
+            return User.findById(req.userId);
+        })
+        .then((user) => {
+            creator = user;
+            user.books.push(book);
+            return user.save();
+        })
+        .then((result) => {
+            res.status(201).json({
+                message: 'Book added successfully',
+                book,
+                creator: { id: creator._id, name: creator.name }
+            });
+        })
         .catch((error) => res.status(500).json({ error }));
 };
 

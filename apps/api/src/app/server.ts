@@ -5,8 +5,11 @@ import mongoose from 'mongoose';
 import { config } from './config/config';
 import Logging from './library/logging';
 import * as path from 'path';
-import authorRoutes from './routes/Author';
 import bookRoutes from './routes/Book';
+import userRoutes from './routes/User';
+import authRoutes from './routes/Auth';
+
+import isAuthenticated from './middleware/is-auth';
 
 const router = express();
 
@@ -16,7 +19,10 @@ router.use('/assets', express.static(path.join(__dirname, 'assets')));
 /** Connect to Mongo */
 export const connectDB = async () => {
     try {
-        await mongoose.connect(config.mongo.url, { retryWrites: true, w: 'majority' });
+        await mongoose.connect(config.mongo.url, {
+            retryWrites: true,
+            w: 'majority'
+        });
         Logging.info('connected');
         StartServer();
     } catch (error) {
@@ -29,9 +35,7 @@ export const connectDB = async () => {
 const StartServer = () => {
     router.use((req: Request, res: Response, next: NextFunction) => {
         /** Log the request */
-        Logging.info(
-            `Incoming -> Method: [${req.method}] - Url: [${req.url}] - IP: [${req.socket.remoteAddress}]`
-        );
+        Logging.info(`Incoming -> Method: [${req.method}] - Url: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
 
         res.on('finish', () => {
             Logging.info(
@@ -48,10 +52,7 @@ const StartServer = () => {
     /** Api Rules */
     router.use((req: Request, res: Response, next: NextFunction) => {
         res.header('Access-Control-Allow-Origin', '*');
-        res.header(
-            'Access-Control-Allow-Headers',
-            'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-        );
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
         if (req.method == 'Options') {
             res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
@@ -62,11 +63,12 @@ const StartServer = () => {
     });
 
     /** Routes */
-    router.use('/api/authors', authorRoutes);
-    router.use('/api/books', bookRoutes);
+    router.use('/api/auth', userRoutes);
+    router.use('/api/books', isAuthenticated, bookRoutes);
+    router.use('/api/auth', authRoutes);
 
     /** Healthcheck */
-    router.get('/api/ping', (req: Request, res: Response, next: NextFunction) =>
+    router.get('/api/ping', isAuthenticated, (req: Request, res: Response, next: NextFunction) =>
         res.status(200).json({ message: 'pong' })
     );
 

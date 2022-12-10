@@ -9,11 +9,7 @@ import { ProjectsComponent } from '../pages/projects/projects.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
-    {
-        path: 'about-me',
-        component: AboutMeComponent,
-        data: { animation: 'isLeft' }
-    },
+
     {
         path: 'projects',
         component: ProjectsComponent,
@@ -27,7 +23,13 @@ const routes: Routes = [
         path: '',
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
-        children: []
+        children: [
+            {
+                path: 'about-me',
+                component: AboutMeComponent,
+                data: { animation: 'isLeft' }
+            }
+        ]
     },
     { path: 'not-found', component: NotFoundComponent },
     { path: '**', component: NotFoundComponent }

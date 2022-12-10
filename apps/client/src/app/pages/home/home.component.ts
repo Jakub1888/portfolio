@@ -12,7 +12,7 @@ export class HomeComponent implements AfterViewInit {
     constructor(private readonly globalService: GlobalService, private readonly cdr: ChangeDetectorRef) {}
 
     ngAfterViewInit(): void {
-        this.globalService.getColorTheme().subscribe((theme: boolean) => {
+        this.globalService.colorTheme$.subscribe((theme: boolean) => {
             this.darkTheme = theme;
         });
 

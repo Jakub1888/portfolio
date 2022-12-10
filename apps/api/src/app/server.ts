@@ -8,6 +8,7 @@ import * as path from 'path';
 import bookRoutes from './routes/Book';
 import userRoutes from './routes/User';
 import authRoutes from './routes/Auth';
+import sleepDataRoutes from './routes/SleepData';
 
 import isAuthenticated from './middleware/is-auth';
 
@@ -65,10 +66,11 @@ const StartServer = () => {
     /** Routes */
     router.use('/api/auth', userRoutes);
     router.use('/api/books', isAuthenticated, bookRoutes);
+    router.use('/api/sleepData', sleepDataRoutes);
     router.use('/api/auth', authRoutes);
 
     /** Healthcheck */
-    router.get('/api/ping', isAuthenticated, (req: Request, res: Response, next: NextFunction) =>
+    router.get('/api/ping', (req: Request, res: Response, next: NextFunction) =>
         res.status(200).json({ message: 'pong' })
     );
 

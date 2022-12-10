@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class GlobalService {
-    private readonly _colorTheme = new BehaviorSubject<boolean>(false);    
+    private readonly _colorThemeSource = new BehaviorSubject<boolean>(false);
+    colorTheme$ = this._colorThemeSource.asObservable();
 
-    getColorTheme(): Observable<boolean> {
-        return this._colorTheme.asObservable();
-    }
-
-    setColorTheme(darkTheme: boolean) {
-        this._colorTheme.next(darkTheme);
+    setColorTheme(darkTheme: boolean): void {
+        this._colorThemeSource.next(darkTheme);
     }
 
     createObserver(): IntersectionObserver {

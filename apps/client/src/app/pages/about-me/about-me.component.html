@@ -1,5 +1,5 @@
 <div class="about-wrapper">
-    <section class="hidden">
+    <section>
         <h1 class="section-heading">About Me</h1>
 
         <p class="description-paragraph">
@@ -9,30 +9,27 @@
         </p>
     </section>
 
-    <section class="learning">
+    <section class="learning {{ darkMode ? 'dark-mode' : 'light-mode' }}">
         <div class="hidden learning-inner">
             <h1 class="section-heading">My Learning</h1>
 
             <p class="description-paragraph">As a self-taught developer I understand the need of</p>
 
             <div class="learning-lists">
-                <h3>Reading</h3>
-                <portfolio-learning-card [learningList]="books"></portfolio-learning-card>
+                <div class="learning-card">
+                    <h3>Reading</h3>
+                    <portfolio-learning-card [learningList]="books"></portfolio-learning-card>
+                </div>
 
-                <h3>Udemy</h3>
-                <ul class="books">
-                    <li *ngFor="let book of books">
-                        <a href="{{ book.url }}">{{ book.title }}</a> -
-                        {{ book.author }}
-                        <span>{{ book.description }}</span>
-                    </li>
-                </ul>
-                <h3>Other</h3>
-                <ul class="books">
-                    <li *ngFor="let book of books">
-                        <span>{{ book.description }}</span>
-                    </li>
-                </ul>
+                <div class="learning-card">
+                    <h3>Udemy</h3>
+                    <portfolio-learning-card [learningList]="books"></portfolio-learning-card>
+                </div>
+
+                <div class="learning-card">
+                    <h3>Other</h3>
+                    <portfolio-learning-card [learningList]="books"></portfolio-learning-card>
+                </div>
             </div>
         </div>
     </section>

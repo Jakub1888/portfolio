@@ -1,0 +1,18 @@
+:host {
+    .form-group {
+        min-width: 25em;
+    }
+    
+    .input-full-width {
+        width: 100%;
+    }
+
+    .auth-input {
+        height: 2.5em;
+    }
+
+    .invalid-feedback {
+        color: red;
+        width: 100%;
+    }
+}

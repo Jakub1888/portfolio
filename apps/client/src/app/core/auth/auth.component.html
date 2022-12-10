@@ -1,47 +1,52 @@
-<section class="auth">
-    <div *ngIf="!authChoiceChoosen">
-        <p>
-            To view projects please login
-            <button class="auth-action" type="button" mat-button (click)="chooseAuthOption('login')">Login</button>
+<section class="auth {{ darkTheme ? 'dark-theme' : 'light-theme' }}">
+    <div *ngIf="!authChoice" class="auth-choices">
+        <p class="auth-tooltip">
+            To view projects please
+            <button class="auth-action" type="button" (click)="chooseAuthOption('login')">Login</button>
+
+            Or if you don't have account yet
+            <button class="auth-action" type="button" (click)="chooseAuthOption('register')">Register</button>
         </p>
 
-        <p>
-            If you don't have account yet
-            <button class="auth-action" type="button" mat-button (click)="chooseAuthOption('register')">
-                Register
-            </button>
-        </p>
-
-        <p>
-            Or you can use a pre-created test account
+        <p class="auth-tooltip">
+            Alternatively you can also use a pre-created test account
             <button class="auth-action" type="button" mat-button (click)="chooseAuthOption('register')">
                 Login as test user
             </button>
         </p>
     </div>
 
-    <form class="auth-form" [formGroup]="authForm" (submit)="onSubmit()" *ngIf="authChoiceChoosen">
-        <h2>{{ authChoice | uppercase }}</h2>
+    <form class="auth-form" [formGroup]="authForm" (ngSubmit)="onSubmit()" *ngIf="authChoice">
+        <h2 class="auth-header">{{ authChoice | uppercase }}</h2>
 
-        <mat-form-field class="input-full-width">
-            <mat-label>Username</mat-label>
-            <input class="auth-input" matInput placeholder="Username" type="text" formControlName="username" />
-        </mat-form-field>
+        <portfolio-input
+            [formControl]="$any(authForm).controls['username']"
+            [type]="'text'"
+            [label]="'Username'"
+        ></portfolio-input>
 
-        <mat-form-field class="input-full-width">
-            <mat-label>Password</mat-label>
-            <input class="auth-input" type="password" matInput placeholder="Password" formControlName="password" />
-        </mat-form-field>
+        <portfolio-input
+            [formControl]="$any(authForm).controls['password']"
+            [type]="'password'"
+            [label]="'Password'"
+        ></portfolio-input>
 
-        <button mat-raised-button type="submit">Submit</button>
+        <portfolio-input
+            *ngIf="authChoice === 'register'"
+            [formControl]="$any(authForm).controls['confirmPassword']"
+            [type]="'password'"
+            [label]="'Confirm Password'"
+        ></portfolio-input>
 
-        <button
-            class="auth-action"
-            type="button"
-            mat-button
-            (click)="chooseAuthOption(authChoice === 'login' ? 'register' : 'login')"
-        >
-            {{ authChoice === 'login' ? "Don't have account yet? Register" : 'Already registered? Login' }}
-        </button>
+        <button button color="primary" type="submit">{{ authChoice | uppercase }}</button>
+
+        <p class="auth-tooltip">
+            {{ authChoice === 'login' ? "Don't have account yet?" : 'Already registered?' }}
+
+            <span (click)="chooseAuthOption(authChoice === 'login' ? 'register' : 'login')">
+                {{ authChoice === 'login' ? 'Register' : 'Login' }}
+            </span>
+        </p>
     </form>
 </section>
+<button (click)="ping()">click</button>

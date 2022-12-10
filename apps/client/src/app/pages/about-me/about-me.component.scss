@@ -10,7 +10,8 @@
     @include section-transition(translateX(-100%), translateX(0));
     section {
         width: 60%;
-        height: 70vh;
+        min-height: 90vh;
+        height: auto;
     }
 
     .learning {
@@ -19,9 +20,20 @@
         margin: 0 auto;
         padding: 5em 0;
         width: 100%;
+        border-top: 3px solid $black;
+        border-bottom: 3px solid $black;
 
         .learning-inner {
-            width: 50%;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .learning-lists {
+            display: flex;
+            justify-content: center;
         }
 
         .description-paragraph {
@@ -29,16 +41,15 @@
         }
     }
 
-    .main-heading {
-        text-align: center;
-        margin-bottom: 0.2em;
-        width: 100%;
-        font-size: 4em;
+    .dark-mode {
+        background-color: darken($c4, 30%);
+        border-top: 3px solid $c2;
+        border-bottom: 3px solid $c2;
     }
 
     .description-paragraph {
-        font-size: 1em;
-        line-height: 2;
+        font-size: 1.1em;
+        line-height: 1.8;
         font-weight: 600;
         text-align: center;
     }
@@ -63,9 +74,5 @@
         .logo:nth-child(1n + #{$i}) {
             transition-delay: $i * 100ms;
         }
-    }
-
-    // Learning
-    .learning-lists {
     }
 }

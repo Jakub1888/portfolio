@@ -13,10 +13,6 @@ export const socials = [
     {
         link: 'https://medium.com/@krasnan.jk',
         label: 'Medium'
-    },
-    {
-        link: 'https://www.instagram.com/',
-        label: 'Instagram'
     }
 ];
 
@@ -32,7 +28,7 @@ export class SocialsComponent {
     constructor(private readonly globalService: GlobalService) {
         this.socials = socials;
         
-        this.globalService.getColorTheme().subscribe((theme: boolean) => {
+        this.globalService.colorTheme$.subscribe((theme: boolean) => {
             this.darkTheme = theme
         })
     }

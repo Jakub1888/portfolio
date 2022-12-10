@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GlobalService } from './services/global.service';
 import { ComponentsModule } from './modules/components.module';
 import { JwtInterceptor } from './interceptors/jwt.inteceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 @NgModule({
     declarations: [AppComponent],
@@ -24,6 +25,10 @@ import { JwtInterceptor } from './interceptors/jwt.inteceptor';
         AppRoutingModule
     ],
     bootstrap: [AppComponent],
-    providers: [GlobalService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }]
+    providers: [
+        GlobalService,
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    ]
 })
 export class AppModule {}

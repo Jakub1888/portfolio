@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import mongoose from 'mongoose';
+import mongoose, { Error } from 'mongoose';
 import User, { IUserModel } from '../models/User';
 import jwt from 'jsonwebtoken';
 
@@ -45,15 +45,17 @@ const loginUser = (req: Request, res: Response, next: NextFunction) => {
     const { username, password } = req.body;
     let loadedUser: IUserModel;
 
-    User.findOne({ username })
-        .then((user): any => {
-            if (!user) {
-                return res.status(401).json({ message: 'User not found.' });
-            }
+    User.findOne({ username }, async (error: Error, user: IUserModel) => {
+        if (error) {
+            return res.status(500).json({ error });
+        }
+
+        if (!user) {
+            return res.status(401).json({ message: 'User not found.' });
+        } else {
             loadedUser = user;
-            return bcrypt.compare(password, user.password);
-        })
-        .then((isEqual) => {
+            const isEqual = await bcrypt.compare(password, user.password);
+
             if (!isEqual) {
                 return res.status(401).json({ message: 'Wrong password' });
             }
@@ -66,8 +68,8 @@ const loginUser = (req: Request, res: Response, next: NextFunction) => {
                 { expiresIn: '1h' }
             );
             res.status(200).json({ token, userId: loadedUser._id.toString() });
-        })
-        .catch((error) => res.status(500).json({ error }));
+        }
+    });
 };
 
 const readUser = (req: Request, res: Response, next: NextFunction) => {

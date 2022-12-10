@@ -25,7 +25,8 @@ function slideTo(direction: string) {
                     position: 'absolute',
                     top: 0,
                     [direction]: 0,
-                    width: '100%'
+                    width: '100%',
+                    overFlow: 'hidden'
                 })
             ],
             optional

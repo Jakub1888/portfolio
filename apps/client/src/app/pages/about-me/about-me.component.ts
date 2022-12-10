@@ -11,14 +11,14 @@ import { books, logos } from '../static-lists';
 export class AboutMeComponent implements AfterViewInit {
     logos: Logo[];
     books: Book[];
-    darkTheme = false;
+    darkMode = false;
 
     constructor(private readonly element: ElementRef, private readonly globalService: GlobalService) {
         this.logos = logos;
         this.books = books;
 
-        this.globalService.getColorTheme().subscribe((theme: boolean) => {
-            this.darkTheme = theme;
+        this.globalService.colorTheme$.subscribe((theme: boolean) => {
+            this.darkMode = theme;
         });
     }
 

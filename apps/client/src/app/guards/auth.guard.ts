@@ -21,7 +21,6 @@ export class AuthGuard implements CanActivate {
         const token = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '')?.token : null;
         const isExpired = this.tokenExpired(token);
 
-        console.log(isExpired, token);
         if (!isExpired) {
             return of(true);
         }

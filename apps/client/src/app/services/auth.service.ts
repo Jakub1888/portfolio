@@ -8,8 +8,8 @@ import { catchError, map, Observable, of, ReplaySubject } from 'rxjs';
 })
 export class AuthService {
     authUrl = '/api/auth';
-    private currentUserSource = new ReplaySubject<any>(1);
-    currentUser$ = this.currentUserSource.asObservable();
+    private _currentUserSource = new ReplaySubject<any>(1);
+    currentUser$ = this._currentUserSource.asObservable();
 
     constructor(private readonly http: HttpClient) {}
 
@@ -40,12 +40,12 @@ export class AuthService {
     setCurrentUser(user: any): void {
         console.log(user);
         localStorage.setItem('user', JSON.stringify(user));
-        this.currentUserSource.next(user);
+        this._currentUserSource.next(user);
     }
 
-    getCurrentUserToken() {
+    getCurrentUserToken(): void {
         const token = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '')?.token : null;
         console.log(token);
-        this.currentUserSource.next(token);
+        this._currentUserSource.next(token);
     }
 }

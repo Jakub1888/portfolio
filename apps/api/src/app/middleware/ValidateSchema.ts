@@ -17,15 +17,24 @@ export const ValidateSchema = (schema: ObjectSchema) => {
     };
 };
 
+const userValidation = {
+    username: Joi.string().required(),
+    password: Joi.string()
+        .pattern(new RegExp(/^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/))
+        .required()
+};
+
 export const Schemas = {
     user: {
-        create: Joi.object<IUserWithBooks>({
-            username: Joi.string().required(),
-            password: Joi.string().min(6).alphanum().required()
+        register: Joi.object<IUserWithBooks>({
+            ...userValidation,
+            confirmPassword: Joi.string()
+                .pattern(new RegExp(/^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/))
+                .required()
         }),
+        login: Joi.object<IUserWithBooks>({ ...userValidation }),
         update: Joi.object<IUserWithBooks>({
-            username: Joi.string().required(),
-            password: Joi.string().min(6).alphanum().required()
+            ...userValidation
         })
     },
     book: {

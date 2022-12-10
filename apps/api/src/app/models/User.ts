@@ -7,7 +7,8 @@ const UserSchema: Schema = new Schema(
     {
         username: { type: String, required: true, unique: true },
         password: { type: String, required: true },
-        books: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
+        books: [{ type: Schema.Types.ObjectId, ref: 'Book' }],
+        sleepDataCollection: [{ type: Schema.Types.ObjectId, ref: 'SleepData' }],
     },
     {
         versionKey: false

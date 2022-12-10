@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
 import { slider } from './route-animations';
 import { GlobalService } from './services/global.service';
-import { AuthService } from './services/auth.service';
 
 @Component({
     selector: 'portfolio-root',
@@ -26,17 +25,13 @@ export class AppComponent implements AfterViewInit {
     darkMode = false;
     resizeTimer: string | number | NodeJS.Timeout | undefined;
 
-    constructor(
-        private readonly http: HttpClient,
-        private readonly globalService: GlobalService,
-        private readonly authService: AuthService
-    ) {
+    constructor(private readonly http: HttpClient, private readonly globalService: GlobalService) {
         if (localStorage.getItem('theme')) {
             this.darkMode = JSON.parse(localStorage.getItem('theme') || '');
             this.globalService.setColorTheme(this.darkMode);
         }
 
-        this.globalService.getColorTheme().subscribe((theme: boolean) => {
+        this.globalService.colorTheme$.subscribe((theme: boolean) => {
             this.darkMode = theme;
         });
     }

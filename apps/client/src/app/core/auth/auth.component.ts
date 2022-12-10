@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { take, tap } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
+import { GlobalService } from '../../services/global.service';
 
 export interface authForm {
     username: FormControl<string>;
@@ -14,31 +17,84 @@ export interface authForm {
     styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent {
-    authChoiceChoosen = false;
-    authChoice: 'login' | 'register' = 'login';
+    authChoice!: 'login' | 'register';
+    authForm!: FormGroup;
+    validators;
+    regPasswordValidators;
+    darkTheme = false;
 
-    authForm = new FormGroup<authForm>({
-        username: new FormControl('', { nonNullable: true }),
-        password: new FormControl('', { nonNullable: true })
-    });
+    constructor(
+        private readonly authService: AuthService,
+        private readonly http: HttpClient,
+        private readonly fb: FormBuilder,
+        private readonly globalService: GlobalService,
+        private readonly toastr: ToastrService
+    ) {
+        this.validators = [Validators.required, Validators.minLength(6), Validators.maxLength(30)];
+        this.regPasswordValidators = [...this.validators, Validators.pattern(/^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/)];
+        this.initForm();
 
-    constructor(private readonly authService: AuthService, private readonly http: HttpClient) {}
+        this.globalService.colorTheme$.subscribe((theme: boolean) => {
+            this.darkTheme = theme;
+        });
+    }
 
     chooseAuthOption(choice: 'login' | 'register'): void {
         this.authChoice = choice;
-        this.authChoiceChoosen = true;
+        this.changePasswordValidity();
         this.authForm.reset();
     }
 
     onSubmit(): void {
-        const authChoice = this.authChoice;
+        if (this.authForm.valid) {
+            const successMessage = this.authChoice === 'register' ? 'registered' : 'logged in';
 
-        this.authService[authChoice](this.authForm.value).subscribe((user) => {
-            console.log(user);
+            this.authService[this.authChoice](this.authForm.value)
+                .pipe(
+                    take(1),
+                    tap(() => {
+                        this.toastr.success(`You have been successfully ${successMessage}.`);
+                    })
+                )
+                .subscribe();
+        }
+    }
+
+    private matchValues(matchTo: string): ValidatorFn {
+        return (control: any) => {
+            return control?.value === control.parent?.controls[matchTo].value ? null : { isMatching: true };
+        };
+    }
+
+    private initForm() {
+        this.authForm = this.fb.group({
+            username: ['', this.validators],
+            password: [''],
+            confirmPassword: ['']
         });
     }
 
-    ping() {
+    changePasswordValidity(): void {
+        this.getControl('password').clearValidators();
+
+        if (this.authChoice === 'register') {
+            this.getControl('confirmPassword').addValidators([Validators.required, this.matchValues('password')]);
+            this.getControl('password').addValidators(this.regPasswordValidators);
+
+            this.getControl('password').valueChanges.subscribe(() => {
+                this.getControl('confirmPassword').updateValueAndValidity();
+            });
+        } else {
+            this.getControl('confirmPassword').clearValidators();
+            this.getControl('password').addValidators(Validators.required);
+        }
+    }
+
+    getControl(control: string): AbstractControl<string, string> {
+        return this.authForm.controls[control] as FormControl;
+    }
+
+    ping(): void {
         this.http.get('api/ping').subscribe((resp) => console.log(resp));
     }
 }

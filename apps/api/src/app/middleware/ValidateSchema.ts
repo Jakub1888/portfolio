@@ -32,7 +32,10 @@ export const Schemas = {
                 .pattern(new RegExp(/^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/))
                 .required()
         }),
-        login: Joi.object<IUserWithBooks>({ ...userValidation }),
+        login: Joi.object<IUserWithBooks>({
+            username: Joi.string().required(),
+            password: Joi.string().required()
+        }),
         update: Joi.object<IUserWithBooks>({
             ...userValidation
         })

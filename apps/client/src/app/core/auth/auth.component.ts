@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { take, tap } from 'rxjs';
+import { catchError, EMPTY, map, of, take, tap } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { GlobalService } from '../../services/global.service';
 
@@ -49,14 +49,18 @@ export class AuthComponent {
         if (this.authForm.valid) {
             const successMessage = this.authChoice === 'register' ? 'registered' : 'logged in';
 
-            this.authService[this.authChoice](this.authForm.value)
+            const authFormValue = this.getAuthFormValues();
+
+            this.authService[this.authChoice](authFormValue)
                 .pipe(
                     take(1),
-                    tap(() => {
-                        this.toastr.success(`You have been successfully ${successMessage}.`);
-                    })
+                    catchError(() => EMPTY)
                 )
-                .subscribe();
+                .subscribe(() => {
+                    // TODO redirect na projekty
+                    this.toastr.success(`You have been successfully ${successMessage}.`);
+                    this.authForm.reset();
+                });
         }
     }
 
@@ -88,6 +92,18 @@ export class AuthComponent {
             this.getControl('confirmPassword').clearValidators();
             this.getControl('password').addValidators(Validators.required);
         }
+    }
+
+    getAuthFormValues() {
+        const authFormValue: { username: string; password: string; confirmPassword?: string } = {
+            username: this.getControl('username').value,
+            password: this.getControl('password').value
+        };
+        if (this.authChoice === 'register') {
+            authFormValue.confirmPassword = this.getControl('confirmPassword').value;
+        }
+
+        return authFormValue;
     }
 
     getControl(control: string): AbstractControl<string, string> {

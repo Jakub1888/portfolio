@@ -64,10 +64,10 @@ const StartServer = () => {
     });
 
     /** Routes */
-    router.use('/api/auth', userRoutes);
+    router.use('/api/user', userRoutes);
+    router.use('/api/auth', authRoutes);
     router.use('/api/books', isAuthenticated, bookRoutes);
     router.use('/api/sleepData', sleepDataRoutes);
-    router.use('/api/auth', authRoutes);
 
     /** Healthcheck */
     router.get('/api/ping', (req: Request, res: Response, next: NextFunction) =>

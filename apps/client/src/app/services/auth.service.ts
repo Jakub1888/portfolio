@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IUser } from '@portfolio/interfaces';
-import { catchError, map, Observable, of, ReplaySubject } from 'rxjs';
+import { User } from '@portfolio/interfaces';
+import { map, Observable, of, ReplaySubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +13,7 @@ export class AuthService {
 
     constructor(private readonly http: HttpClient) {}
 
-    register(model: IUser): Observable<void> {
+    register(model: User): Observable<void> {
         return this.http.post(this.authUrl + '/register', model).pipe(
             map((user) => {
                 if (user) {
@@ -23,16 +23,12 @@ export class AuthService {
         );
     }
 
-    login(model: IUser): Observable<void> {
+    login(model: User): Observable<void> {
         return this.http.post(this.authUrl + '/login', model).pipe(
             map((user) => {
                 if (user) {
                     this.setCurrentUser(user);
                 }
-            }),
-            catchError((error) => {
-                console.log(error);
-                return of(error);
             })
         );
     }
@@ -43,9 +39,28 @@ export class AuthService {
         this._currentUserSource.next(user);
     }
 
-    getCurrentUserToken(): void {
+    isUserLoggedIn(): Observable<boolean> {
+        const token = this.getCurrentUserToken();
+        const isExpired = this.tokenExpired(token);
+
+        if (!isExpired) {
+            return of(true);
+        }
+
+        return of(false);
+    }
+
+    getCurrentUserToken(): any {
         const token = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '')?.token : null;
-        console.log(token);
         this._currentUserSource.next(token);
+        return token;
+    }
+
+    private tokenExpired(token: string): boolean {
+        if (token) {
+            const expiry = JSON.parse(atob(token?.split('.')[1])).exp;
+            return Math.floor(new Date().getTime() / 1000) >= expiry;
+        }
+        return true;
     }
 }

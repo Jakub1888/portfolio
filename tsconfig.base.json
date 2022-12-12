@@ -16,6 +16,7 @@
         "baseUrl": ".",
         "paths": {
             "@portfolio/interfaces": ["libs/interfaces/src/index.ts"],
+            "@portfolio/sleep-tracker": ["libs/sleep-tracker/src/index.ts"],
             "@portfolio/tests": ["libs/tests/src/index.ts"],
             "@portfolio/ui-components": ["libs/ui-components/src/index.ts"]
         }

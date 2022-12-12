@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Response } from 'express';
 import mongoose from 'mongoose';
 import User from '../models/User';
 import SleepData from '../models/SleepData';
-
-export interface Req extends Request {
-    userId: string;
-}
+import { serverError } from '../library/serverError';
+import { Req } from '@portfolio/interfaces';
 
 const createSleepData = (req: Req, res: Response, next: NextFunction) => {
     const { quality, wentToBedAt, wokeUpAt, mood, description } = req.body;
@@ -19,7 +17,7 @@ const createSleepData = (req: Req, res: Response, next: NextFunction) => {
         wokeUpAt,
         mood,
         description,
-        user: "638f0120a6a0039e937aebe1"
+        user: '638f0120a6a0039e937aebe1'
     });
 
     return sleepData
@@ -39,12 +37,9 @@ const createSleepData = (req: Req, res: Response, next: NextFunction) => {
                 creator: { id: creator._id, name: creator.name }
             });
         })
-        .catch((error) =>  {
-            console.log(error);
-            return res.status(500).json({ error })
-        });
+        .catch((error) => serverError(error, res));
 };
 
 export default {
     createSleepData
-}
+};

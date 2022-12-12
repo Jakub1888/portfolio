@@ -15,8 +15,8 @@
 }
 
 .dark-mode {
-    color: $c1;
-    background-color: darken($c5, 20%);
+    color: $c3;
+    background-color: $c2;
     // background: linear-gradient(
     //     -45deg,
     //     lighten($c2, 10%),
@@ -29,7 +29,7 @@
 
 .light-mode {
     color: darken($c2, 10%);
-    background-color: lighten($c5, 10%);
+    background-color: darken($c4, 20%);
 
     // background: linear-gradient(
     //     -45deg,

@@ -20,8 +20,8 @@
         margin: 0 auto;
         padding: 5em 0;
         width: 100%;
-        border-top: 3px solid $black;
-        border-bottom: 3px solid $black;
+        border-top: 3px solid darken($c5, 10%);
+        border-bottom: 3px solid darken($c5, 10%);
 
         .learning-inner {
             width: 80%;
@@ -42,9 +42,7 @@
     }
 
     .dark-mode {
-        background-color: darken($c4, 30%);
-        border-top: 3px solid $c2;
-        border-bottom: 3px solid $c2;
+        background-color: lighten($c2, 10%);
     }
 
     .description-paragraph {

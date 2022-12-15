@@ -27,6 +27,12 @@ const routes: Routes = [
         component: AuthComponent
     },
     {
+        path: 'projects/sleep-tracker',
+        runGuardsAndResolvers: 'always',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('@portfolio/sleep-tracker').then((m) => m.SleepTrackerModule)
+    },
+    {
         path: '',
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],

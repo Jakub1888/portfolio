@@ -1,0 +1,19 @@
+:host {
+    section {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .wrapper {
+        width: 70em;
+        height: 50vh;
+        min-height: 20em;
+        border-radius: 1em;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        background-color: #fff;
+    }
+}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GlobalService } from '../../../services/global.service';
+import { GlobalService } from '../../services/global.service';
 
 export const socials = [
     {
@@ -27,10 +27,9 @@ export class SocialsComponent {
 
     constructor(private readonly globalService: GlobalService) {
         this.socials = socials;
-        
-        this.globalService.colorTheme$.subscribe((theme: boolean) => {
-            this.darkTheme = theme
-        })
-    }
-    }
 
+        this.globalService.colorTheme$.subscribe((theme: boolean) => {
+            this.darkTheme = theme;
+        });
+    }
+}

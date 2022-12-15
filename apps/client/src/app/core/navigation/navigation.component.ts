@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Link } from '@portfolio/interfaces';
-import { GlobalService } from '../../../services/global.service';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
     selector: 'portfolio-navigation',

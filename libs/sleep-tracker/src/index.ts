@@ -1,3 +1,3 @@
-export * from './lib/sleep-tracker.module';
+export * from './app/sleep-tracker.module';
 
-export * from './lib/lib.routes';
+export * from './app/sleep-tracker.routes';

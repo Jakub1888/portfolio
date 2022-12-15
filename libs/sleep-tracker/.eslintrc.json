@@ -10,7 +10,7 @@
                     "error",
                     {
                         "type": "attribute",
-                        "prefix": "portfolio",
+                        "prefix": "st",
                         "style": "camelCase"
                     }
                 ],
@@ -18,7 +18,7 @@
                     "error",
                     {
                         "type": "element",
-                        "prefix": "portfolio",
+                        "prefix": "st",
                         "style": "kebab-case"
                     }
                 ]

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY, map, of, take, tap } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
@@ -28,7 +29,8 @@ export class AuthComponent {
         private readonly http: HttpClient,
         private readonly fb: FormBuilder,
         private readonly globalService: GlobalService,
-        private readonly toastr: ToastrService
+        private readonly toastr: ToastrService,
+        private readonly router: Router
     ) {
         this.validators = [Validators.required, Validators.minLength(6), Validators.maxLength(30)];
         this.regPasswordValidators = [...this.validators, Validators.pattern(/^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/)];
@@ -57,8 +59,8 @@ export class AuthComponent {
                     catchError(() => EMPTY)
                 )
                 .subscribe(() => {
-                    // TODO redirect na projekty
                     this.toastr.success(`You have been successfully ${successMessage}.`);
+                    this.router.navigateByUrl('projects/sleep-tracker');
                     this.authForm.reset();
                 });
         }

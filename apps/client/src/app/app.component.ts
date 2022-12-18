@@ -1,5 +1,4 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
 import { slider } from './route-animations';
 import { GlobalService } from './services/global.service';
@@ -25,7 +24,7 @@ export class AppComponent implements AfterViewInit {
     darkMode = false;
     resizeTimer: string | number | NodeJS.Timeout | undefined;
 
-    constructor(private readonly http: HttpClient, private readonly globalService: GlobalService) {
+    constructor(private readonly globalService: GlobalService) {
         if (localStorage.getItem('theme')) {
             this.darkMode = JSON.parse(localStorage.getItem('theme') || '');
             this.globalService.setColorTheme(this.darkMode);
@@ -40,7 +39,7 @@ export class AppComponent implements AfterViewInit {
         this.preventAnimationsOnWindowResize();
     }
 
-    preventAnimationsOnWindowResize(): void {
+    private preventAnimationsOnWindowResize(): void {
         window.addEventListener('resize', () => {
             document.body.classList.add('resize-animation-stopper');
             clearTimeout(this.resizeTimer);

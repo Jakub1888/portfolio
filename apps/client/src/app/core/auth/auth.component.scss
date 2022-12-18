@@ -21,18 +21,14 @@
         border-radius: 1em;
         padding: 2em;
         width: 30em;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
+        @include flex-positioning(column, center, center);
     }
 
     .auth-form {
         border-radius: 1em;
         width: 30em;
         padding: 1em;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
+        @include flex-positioning(column, center, center);
         border: 3px solid $c5;
     }
 

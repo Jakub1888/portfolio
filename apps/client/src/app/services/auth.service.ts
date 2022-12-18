@@ -13,8 +13,8 @@ export class AuthService {
 
     constructor(private readonly http: HttpClient) {}
 
-    register(model: User): Observable<void> {
-        return this.http.post(this.authUrl + '/register', model).pipe(
+    register(userCredentials: User): Observable<void> {
+        return this.http.post(this.authUrl + '/register', userCredentials).pipe(
             map((user) => {
                 if (user) {
                     this.setCurrentUser(user);
@@ -23,8 +23,8 @@ export class AuthService {
         );
     }
 
-    login(model: User): Observable<void> {
-        return this.http.post(this.authUrl + '/login', model).pipe(
+    login(userCredentials: User): Observable<void> {
+        return this.http.post(this.authUrl + '/login', userCredentials).pipe(
             map((user) => {
                 if (user) {
                     this.setCurrentUser(user);
@@ -34,7 +34,6 @@ export class AuthService {
     }
 
     setCurrentUser(user: any): void {
-        console.log(user);
         localStorage.setItem('user', JSON.stringify(user));
         this._currentUserSource.next(user);
     }

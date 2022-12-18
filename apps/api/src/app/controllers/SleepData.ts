@@ -6,31 +6,26 @@ import SleepData from '../models/SleepData';
 import { serverError } from '../library/serverError';
 import { Req } from '@portfolio/interfaces';
 
-const createSleepData = (req: Req, res: Response, next: NextFunction) => {
-    const { quality, wentToBedAt, wokeUpAt, mood, description } = req.body;
+const createSleepData = async (req: Req, res: Response, next: NextFunction) => {
     let creator;
+    const sleepData = createSleepDataModel(req);
 
-    const sleepData = new SleepData({
-        _id: new mongoose.Types.ObjectId(),
-        quality,
-        wentToBedAt,
-        wokeUpAt,
-        mood,
-        description,
-        user: '638f0120a6a0039e937aebe1'
-    });
+    const date = await SleepData.findOne({ dateOfSleep: sleepData.dateOfSleep, user: sleepData.user });
+    if (date) {
+        return res.status(409).json({ message: 'Sleep data for the selected day already exists.' });
+    }
 
     return sleepData
         .save()
         .then(() => {
-            return User.findById(req.userId);
+            return User.findById(sleepData.user);
         })
         .then((user) => {
             creator = user;
             user.sleepDataCollection.push(sleepData);
             return user.save();
         })
-        .then((result) => {
+        .then(() => {
             res.status(201).json({
                 message: 'Sleep data added successfully',
                 sleepData,
@@ -38,6 +33,23 @@ const createSleepData = (req: Req, res: Response, next: NextFunction) => {
             });
         })
         .catch((error) => serverError(error, res));
+};
+
+const createSleepDataModel = (req: Req) => {
+    const { dateOfSleep, quality, wentToBedAt, wokeUpAt, mood, description, user } = req.body;
+
+    const sleepData = new SleepData({
+        _id: new mongoose.Types.ObjectId(),
+        dateOfSleep,
+        quality,
+        wentToBedAt,
+        wokeUpAt,
+        mood,
+        description,
+        user
+    });
+
+    return sleepData;
 };
 
 export default {

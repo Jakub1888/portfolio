@@ -9,7 +9,6 @@ import User from '../models/User';
 const createBook = (req: Req, res: Response, next: NextFunction) => {
     const { title } = req.body;
     let creator;
-    console.log(req.userId);
 
     const book = new Book({
         _id: new mongoose.Types.ObjectId(),

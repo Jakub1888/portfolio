@@ -1,13 +1,12 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .nav {
+    @include flex-positioning(row, flex-start, center);
     position: absolute;
     padding: 1.4em 2em;
     z-index: 10;
     width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
 
     .nav-links {
         display: flex;

@@ -5,6 +5,8 @@ import mongoose, { Error } from 'mongoose';
 import User, { IUserModel } from '../models/User';
 import jwt from 'jsonwebtoken';
 import { serverError } from '../library/serverError';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const registerUser = (req: Request, res: Response, next: NextFunction) => {
     const { username, password } = req.body;
@@ -31,8 +33,8 @@ const registerUser = (req: Request, res: Response, next: NextFunction) => {
                                 username: user.username,
                                 userId: user._id.toString()
                             },
-                            'secret', // TODO change secret
-                            { expiresIn: '1h' }
+                            process.env.JWT_SECRET,
+                            { expiresIn: process.env.JWT_EXPIRE }
                         );
                         res.status(200).json({ token, userId: user._id.toString() });
                     })
@@ -65,8 +67,8 @@ const loginUser = (req: Request, res: Response, next: NextFunction) => {
                     username: loadedUser.username,
                     userId: loadedUser._id.toString()
                 },
-                'secret',
-                { expiresIn: '1h' }
+                process.env.JWT_SECRET,
+                { expiresIn: process.env.JWT_EXPIRE }
             );
             res.status(200).json({ token, userId: loadedUser._id.toString() });
         }

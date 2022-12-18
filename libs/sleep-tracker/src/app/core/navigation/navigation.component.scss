@@ -1,0 +1,20 @@
+:host {
+    width: 100%;
+
+    .sleep-tracker-nav {
+        height: 3em;
+        padding: 1em;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        border-bottom: 1px solid #000;
+    }
+
+    .nav-list {
+        display: flex;
+
+        .nav-list-item {
+            padding-right: 1em;
+        }
+    }
+}

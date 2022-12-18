@@ -1,0 +1,40 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Event, NavigationEnd, Route, Router } from '@angular/router';
+
+@Component({
+    selector: 'st-home',
+    template: `
+        <section>
+            <div class="wrapper">
+                <st-navigation></st-navigation>
+
+                <button
+                    *ngIf="!viewingChildRoute"
+                    button
+                    color="primary"
+                    type="button"
+                    [routerLink]="[{ outlets: { st: ['form'] } }]"
+                >
+                    How did you sleep tonight?
+                </button>
+
+                <router-outlet name="st"></router-outlet>
+            </div>
+        </section>
+    `,
+    styleUrls: ['./dashboard.component.scss']
+})
+export class DashboardComponent implements OnInit {
+    viewingChildRoute!: boolean;
+
+    constructor(private readonly router: Router, private readonly route: ActivatedRoute) {}
+
+    ngOnInit(): void {
+        this.router.events.subscribe((event: Event): void => {
+            if (event instanceof NavigationEnd) {
+                const url = event.url;
+                this.viewingChildRoute = url.search('st:') !== -1;
+            }
+        });
+    }
+}

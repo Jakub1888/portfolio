@@ -18,7 +18,6 @@ export class AuthGuard implements CanActivate {
     canActivate(): boolean {
         this.authService.isUserLoggedIn().subscribe((resp: boolean) => {
             this.isAuthenticated = resp;
-            console.log(this.isAuthenticated);
         });
         if (!this.isAuthenticated) {
             this.toastr.error('You are not authenicated');

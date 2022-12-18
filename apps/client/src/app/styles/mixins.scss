@@ -13,12 +13,16 @@
     }
 }
 
+@mixin flex-positioning($direction, $justify, $align) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
 @mixin section-transition($axisShow, $axisHide) {
     section {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        @include flex-positioning(column, center, center);
         min-height: 70vh;
         font-weight: 700;
         font-size: 1.2em;

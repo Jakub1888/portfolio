@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -23,6 +22,7 @@ import { NotFoundComponent } from '../errors/not-found/not-found.component';
 import { HomeComponent } from '../pages/home/home.component';
 import { LearningCardComponent } from '../pages/about-me/learning-card/learning-card.component';
 import { MatCardModule } from '@angular/material/card';
+
 @NgModule({
     declarations: [
         NavigationComponent,
@@ -36,7 +36,6 @@ import { MatCardModule } from '@angular/material/card';
     ],
     imports: [
         CommonModule,
-        LayoutModule,
         MatToolbarModule,
         MatButtonModule,
         MatSidenavModule,

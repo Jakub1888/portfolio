@@ -2,16 +2,18 @@
 @import '../../../../../../apps/client/src/app/styles/mixins.scss';
 :host {
     section {
-        height: 100vh;
         @include flex-positioning(row, center, center);
+        margin-top: 5em;
     }
 
     .wrapper {
-        width: 70em;
-        height: auto;
-        min-height: 20em;
+        width: 50em;
+        height: 32em;
         border-radius: 1em;
         @include flex-positioning(column, none, center);
-        background-color: #fff;
+        background-color: #482980;
+        box-shadow: -8px 11px 16px -1px rgba(0, 0, 0, 0.89);
+        -webkit-box-shadow: -8px 11px 16px -1px rgba(0, 0, 0, 0.89);
+        -moz-box-shadow: -8px 11px 16px -1px rgba(0, 0, 0, 0.89);
     }
 }

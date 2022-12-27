@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Link } from '@portfolio/interfaces';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
 import { GlobalService } from '../../services/global.service';
 
 @Component({
@@ -11,7 +14,12 @@ export class NavigationComponent {
     darkMode = false;
     navList: Link[];
 
-    constructor(private readonly globalService: GlobalService) {
+    constructor(
+        private readonly globalService: GlobalService,
+        private readonly authService: AuthService,
+        private readonly toastr: ToastrService,
+        private readonly router: Router
+    ) {
         this.navList = [
             {
                 title: 'About Me',
@@ -29,6 +37,15 @@ export class NavigationComponent {
                 class: 'navLink'
             }
         ];
+    }
+
+    logout(): void {
+        if (this.authService.userTokens) {
+            this.authService.logout().subscribe((resp) => {
+                this.toastr.success(resp.message);
+                this.router.navigateByUrl('/projects');
+            });
+        }
     }
 
     onThemeToggle(darkMode: boolean): void {

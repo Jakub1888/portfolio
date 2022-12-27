@@ -1,14 +1,14 @@
 <nav class="nav">
     <img src="assets/svg/logo.svg" class="logo" routerLink="/" />
     <ul class="nav-links">
+        <li class="links-item">
+            <button (click)="logout()">Log out</button>
+        </li>
         <li class="links-item" *ngFor="let navItem of navList">
             <portfolio-link [link]="navItem"></portfolio-link>
         </li>
         <li>
-            <portfolio-toggler
-                class="theme-toggler"
-                (themeToggle)="onThemeToggle($event)"
-            ></portfolio-toggler>
+            <portfolio-toggler class="theme-toggler" (themeToggle)="onThemeToggle($event)"></portfolio-toggler>
         </li>
     </ul>
 </nav>

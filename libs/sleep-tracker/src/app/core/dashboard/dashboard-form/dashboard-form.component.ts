@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { SleepTrackerForm } from '@portfolio/interfaces';
 import { SleepTrackerService } from '../../services/sleep-tracker/sleep-tracker.service';
@@ -12,12 +12,17 @@ export class DashboardFormComponent implements OnInit {
     sleepTrackerForm!: FormGroup<SleepTrackerForm>;
     qualities: number[];
 
-    constructor(private readonly fb: FormBuilder, private readonly sleepTrackerService: SleepTrackerService) {
+    constructor(
+        private readonly fb: FormBuilder,
+        private readonly sleepTrackerService: SleepTrackerService,
+        private readonly cdr: ChangeDetectorRef
+    ) {
         this.qualities = [1, 2, 3, 4, 5];
     }
 
     ngOnInit(): void {
         this.initForm();
+        this.cdr.detectChanges();
     }
 
     onSubmit(): void {

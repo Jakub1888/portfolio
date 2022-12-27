@@ -1,11 +1,4 @@
-import {
-    animate,
-    group,
-    query,
-    style,
-    transition,
-    trigger
-} from '@angular/animations';
+import { animate, group, query, style, transition, trigger } from '@angular/animations';
 
 export const slider = trigger('routeAnimations', [
     transition('* => isLeft', slideTo('left')),
@@ -26,21 +19,15 @@ function slideTo(direction: string) {
                     top: 0,
                     [direction]: 0,
                     width: '100%',
-                    overFlow: 'hidden'
+                    overflow: 'hidden'
                 })
             ],
             optional
         ),
         query(':enter', [style({ [direction]: '-100%' })]),
         group([
-            query(
-                ':leave',
-                [animate('600ms ease', style({ [direction]: '100%' }))],
-                optional
-            ),
-            query(':enter', [
-                animate('600ms ease', style({ [direction]: '0%' }))
-            ])
+            query(':leave', [animate('600ms ease', style({ [direction]: '100%' }))], optional),
+            query(':enter', [animate('600ms ease', style({ [direction]: '0%' }))])
         ])
     ];
 }

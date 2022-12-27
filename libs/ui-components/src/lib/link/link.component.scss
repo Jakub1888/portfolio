@@ -42,7 +42,7 @@
 }
 
 .navLink {
-    @include link-colors(darken($c3, 5%));
+    @include link-colors($c4);
 }
 
 .learningLink {

@@ -1,64 +1,60 @@
 <section>
     <form class="sleep-tracker-form" [formGroup]="sleepTrackerForm" (submit)="onSubmit()">
-        <mat-form-field>
-            <mat-label>Date of sleep</mat-label>
-            <input formControlName="dateOfSleep" matInput [matDatepicker]="picker" />
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+        <div class="form-col">
+            <mat-form-field appearance="outline">
+                <mat-label>Date of sleep</mat-label>
+                <input formControlName="dateOfSleep" matInput [matDatepicker]="picker" />
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
 
-        <div class="ngx-timepicker-field-example">
-            <label for="wentToBedAt">When did you go to bed?</label>
+            <mat-form-field appearance="outline">
+                <mat-label>Bed time</mat-label>
+                <input formControlName="wentToBedAt" type="time" matInput placeholder="22:00" />
+            </mat-form-field>
 
-            <ngx-timepicker-field
-                formControlName="wentToBedAt"
-                [format]="24"
-                [defaultTime]="'22:00'"
-                [controlOnly]="true"
-            ></ngx-timepicker-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Wake up time</mat-label>
+                <input formControlName="wokeUpAt" type="time" matInput placeholder="06:00" />
+            </mat-form-field>
         </div>
 
-        <div class="ngx-timepicker-field-example">
-            <label for="wokeUpAt">When did you wake up?</label>
+        <div class="form-col">
+            <mat-form-field appearance="outline">
+                <mat-label>Sleep quality</mat-label>
+                <mat-select formControlName="quality">
+                    <mat-option *ngFor="let quality of qualities" [value]="quality">
+                        {{ quality }}
+                    </mat-option>
+                </mat-select>
+                <mat-hint>1 = poor, 5 = excellent</mat-hint>
+            </mat-form-field>
 
-            <ngx-timepicker-field
-                formControlName="wokeUpAt"
-                [format]="24"
-                [defaultTime]="'06:00'"
-                [controlOnly]="true"
-            ></ngx-timepicker-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Mood after waking up</mat-label>
+                <mat-select formControlName="mood">
+                    <mat-option *ngFor="let quality of qualities" [value]="quality">
+                        {{ quality }}
+                    </mat-option>
+                </mat-select>
+                <mat-hint>1 = poor, 5 = excellent</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Description</mat-label>
+                <textarea
+                    formControlName="description"
+                    matInput
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5"
+                ></textarea>
+            </mat-form-field>
         </div>
 
-        <label>How would you rate the quality of your sleep?</label>
-        <mat-form-field>
-            <mat-select formControlName="quality">
-                <mat-option *ngFor="let quality of qualities" [value]="quality">
-                    {{ quality }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>How would you rate your mood after waking up?</mat-label>
-            <mat-select formControlName="mood">
-                <mat-option *ngFor="let quality of qualities" [value]="quality">
-                    {{ quality }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>Description</mat-label>
-            <textarea
-                formControlName="description"
-                matInput
-                cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="1"
-                cdkAutosizeMaxRows="5"
-            ></textarea>
-        </mat-form-field>
-
-        <button button type="submit" color="secondary">Submit</button>
+        <div class="form-btn">
+            <button button type="submit" color="secondary">Submit</button>
+        </div>
     </form>
 </section>

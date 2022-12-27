@@ -3,6 +3,27 @@
 
 :host {
     .sleep-tracker-form {
+        @include flex-positioning(row, center, center);
+        flex-wrap: wrap;
+    }
+
+    .form-col {
         @include flex-positioning(column, center, center);
+        width: 20em;
+    }
+
+    .mat-mdc-form-field {
+        width: 15em;
+    }
+
+    .form-btn {
+        flex: 0 0 100%;
+
+        button {
+        }
+    }
+    ::ng-deep .mdc-text-field {
+        border-radius: 4px;
+        background-color: gray;
     }
 }

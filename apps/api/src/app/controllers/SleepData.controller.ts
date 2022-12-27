@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Response } from 'express';
 import mongoose from 'mongoose';
-import User from '../models/User';
-import SleepData from '../models/SleepData';
-import { serverError } from '../library/serverError';
+import User from '../models/User.model';
+import SleepData from '../models/SleepData.model';
+import { serverError } from '../utils/serverError';
 import { Req } from '@portfolio/interfaces';
 
 const createSleepData = async (req: Req, res: Response, next: NextFunction) => {

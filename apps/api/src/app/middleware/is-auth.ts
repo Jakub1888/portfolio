@@ -11,7 +11,7 @@ export default (req: any, res: Response, next: NextFunction) => {
     let decodedToken;
 
     try {
-        decodedToken = jwt.verify(token, 'secret'); // TODO change secret
+        decodedToken = jwt.verify(token, process.env.ACCESS_SECRET);
     } catch (error) {
         if (!decodedToken) {
             return res.status(401).json({ error: 'Not Authenticated' });

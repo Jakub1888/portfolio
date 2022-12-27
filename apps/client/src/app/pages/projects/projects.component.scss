@@ -3,7 +3,4 @@
 
 :host {
     @include section-transition(translateX(-100%), translateX(0));
-    section {
-        height: 100vh;
-    }
 }

@@ -1,5 +1,5 @@
 import { connectDB } from './app/server';
-import Logging from './app/library/logging';
+import Logging from './app/utils/logging';
 
 const start = async () => {
     try {

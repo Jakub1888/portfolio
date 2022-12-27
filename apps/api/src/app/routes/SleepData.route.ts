@@ -1,5 +1,5 @@
 import express from 'express';
-import controller from '../controllers/SleepData';
+import controller from '../controllers/SleepData.controller';
 
 const router = express.Router();
 

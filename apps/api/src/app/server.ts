@@ -3,12 +3,11 @@ import express, { NextFunction, Request, Response } from 'express';
 import http from 'http';
 import mongoose from 'mongoose';
 import { config } from './config/config';
-import Logging from './library/logging';
+import Logging from './utils/logging';
 import * as path from 'path';
-import bookRoutes from './routes/Book';
-import userRoutes from './routes/User';
-import authRoutes from './routes/Auth';
-import sleepDataRoutes from './routes/SleepData';
+import userRoutes from './routes/User.route';
+import authRoutes from './routes/Auth.route';
+import sleepDataRoutes from './routes/SleepData.route';
 
 import isAuthenticated from './middleware/is-auth';
 
@@ -66,8 +65,7 @@ const StartServer = () => {
     /** Routes */
     router.use('/api/user', userRoutes);
     router.use('/api/auth', authRoutes);
-    router.use('/api/books', isAuthenticated, bookRoutes);
-    router.use('/api/sleepData', sleepDataRoutes);
+    router.use('/api/sleepData', isAuthenticated, sleepDataRoutes);
 
     /** Healthcheck */
     router.get('/api/ping', (req: Request, res: Response, next: NextFunction) =>

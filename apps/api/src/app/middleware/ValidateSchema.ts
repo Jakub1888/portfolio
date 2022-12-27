@@ -1,8 +1,7 @@
-import { IUserWithBooks } from '@portfolio/interfaces';
+import { IUserWithSleepDataCollection } from '@portfolio/interfaces';
 import { NextFunction, Request, Response } from 'express';
 import Joi, { ObjectSchema } from 'joi';
-import Logging from '../library/logging';
-import { IBook } from '../models/Book';
+import Logging from '../utils/logging';
 
 export const ValidateSchema = (schema: ObjectSchema) => {
     return async (req: Request, res: Response, next: NextFunction) => {
@@ -26,29 +25,21 @@ const userValidation = {
 
 export const Schemas = {
     user: {
-        register: Joi.object<IUserWithBooks>({
+        register: Joi.object<IUserWithSleepDataCollection>({
             ...userValidation,
             confirmPassword: Joi.string()
                 .pattern(new RegExp(/^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*)$/))
                 .required()
         }),
-        login: Joi.object<IUserWithBooks>({
+        login: Joi.object<IUserWithSleepDataCollection>({
             username: Joi.string().required(),
             password: Joi.string().required()
         }),
-        update: Joi.object<IUserWithBooks>({
+        update: Joi.object<IUserWithSleepDataCollection>({
             ...userValidation
-        })
-    },
-    book: {
-        create: Joi.object<IBook>({
-            title: Joi.string().required()
         }),
-        update: Joi.object<IBook>({
-            user: Joi.string()
-                .regex(/^[0-9a-fA-F]{24}$/)
-                .required(),
-            title: Joi.string().required()
+        token: Joi.object<any>({
+            refreshToken: Joi.string().required()
         })
     }
 };

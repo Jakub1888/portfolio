@@ -3,27 +3,62 @@
 
 :host {
     .sleep-tracker-form {
-        @include flex-positioning(row, center, center);
+        @include flex-positioning(row, center, start);
         flex-wrap: wrap;
     }
 
+    .form-heading {
+        text-align: center;
+        font-size: 2em;
+        font-weight: 800;
+        padding: 0.8em 0;
+    }
+
     .form-col {
-        @include flex-positioning(column, center, center);
+        @include flex-positioning(column, start, center);
         width: 20em;
     }
 
     .mat-mdc-form-field {
-        width: 15em;
+        width: 17em;
+        margin-bottom: 1em;
+    }
+
+    ::ng-deep .mat-mdc-select-value,
+    input,
+    textarea {
+        color: #e0e4ea !important;
+    }
+
+    .half-input {
+        width: 8em;
+    }
+
+    .half-input.left {
+        margin-right: 1em;
+    }
+
+    .inp-label {
+        color: $st1;
+        font-weight: 700;
     }
 
     .form-btn {
         flex: 0 0 100%;
-
-        button {
-        }
+        @include flex-positioning(column, center, center);
     }
+
     ::ng-deep .mdc-text-field {
-        border-radius: 4px;
-        background-color: gray;
+        border-radius: 1em;
+        font-weight: 800;
+        background-color: $st2;
+    }
+
+    ::ng-deep .mdc-text-field--focused {
+        outline: 2px solid $st5;
+    }
+
+    ::ng-deep .mdc-line-ripple {
+        display: none;
     }
 }

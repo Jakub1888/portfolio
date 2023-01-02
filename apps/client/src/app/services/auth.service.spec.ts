@@ -2,7 +2,7 @@
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { AuthService } from './auth.service';
+import { AuthService } from '@portfolio/ui-components';
 
 describe('AuthService', () => {
     beforeEach(() =>
@@ -23,7 +23,7 @@ describe('AuthService', () => {
             userId: '232c36C18ľ17d172cfa5574n'
         };
         const service: AuthService = TestBed.get(AuthService);
-        service.setCurrentUser(data);
+        // service.setCurrentUser(data);
 
         let currentUser;
         service.currentUser$.subscribe((user) => (currentUser = user));

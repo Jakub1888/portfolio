@@ -7,10 +7,10 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './modules/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GlobalService } from './services/global.service';
 import { ComponentsModule } from './modules/components.module';
 import { JwtInterceptor } from './interceptors/jwt.inteceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { GlobalService } from '@portfolio/ui-components';
 
 @NgModule({
     declarations: [AppComponent],

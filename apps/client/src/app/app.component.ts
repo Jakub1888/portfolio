@@ -1,7 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AuthService, GlobalService } from '@portfolio/ui-components';
 import { slider } from './route-animations';
-import { GlobalService } from './services/global.service';
 
 @Component({
     selector: 'portfolio-root',
@@ -15,7 +15,6 @@ import { GlobalService } from './services/global.service';
                 <!--[@routeAnimations]="prepareRoute(outlet)" -->
                 <router-outlet #outlet="outlet"></router-outlet>
                 <portfolio-socials></portfolio-socials>
-                <hr />
             </main>
         </div>
     `
@@ -24,7 +23,7 @@ export class AppComponent implements AfterViewInit {
     darkMode = false;
     resizeTimer: string | number | NodeJS.Timeout | undefined;
 
-    constructor(private readonly globalService: GlobalService) {
+    constructor(private readonly globalService: GlobalService, private readonly authService: AuthService) {
         if (localStorage.getItem('theme')) {
             this.darkMode = JSON.parse(localStorage.getItem('theme') || '');
             this.globalService.setColorTheme(this.darkMode);
@@ -33,6 +32,8 @@ export class AppComponent implements AfterViewInit {
         this.globalService.colorTheme$.subscribe((theme: boolean) => {
             this.darkMode = theme;
         });
+
+        this.authService.refreshToken().subscribe();
     }
 
     ngAfterViewInit(): void {

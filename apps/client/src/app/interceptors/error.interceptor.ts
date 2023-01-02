@@ -30,7 +30,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                             this.toastr.error(error.error.message, `${error.status}: ${error.statusText}`);
                             break;
                         case 404:
-                            this.router.navigateByUrl('/not-found');
+                            if (error.error.message !== 'Sleep data for selected date was not found.')
+                                this.router.navigateByUrl('/not-found');
                             break;
                         case 409:
                             this.toastr.error(error.error.message, `${error.status}: ${error.statusText}`);

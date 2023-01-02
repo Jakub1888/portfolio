@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GlobalService } from '../../services/global.service';
+import { GlobalService } from '@portfolio/ui-components';
 
 export const socials = [
     {

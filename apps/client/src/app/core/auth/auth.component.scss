@@ -4,7 +4,7 @@
 :host {
     @include section-transition(translateX(-100%), translateX(0));
     .auth {
-        height: 100vh;
+        height: calc(100vh - 5em);
     }
 
     .dark-theme .auth-form {

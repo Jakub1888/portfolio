@@ -2,12 +2,13 @@
 @import '../../styles/mixins.scss';
 
 .nav {
-    @include flex-positioning(row, flex-start, center);
-    padding: 1.4em 2em;
+    @include flex-positioning(row, center, center);
     width: 100%;
+    height: 5em;
+    padding: 1.4em 2em;
 
     .nav-links {
-        display: flex;
+        @include flex-positioning(row, center, center);
     }
 
     .links-item {
@@ -32,6 +33,6 @@
 
     .theme-toggler {
         position: relative;
-        top: -20px;
+        top: -12px;
     }
 }

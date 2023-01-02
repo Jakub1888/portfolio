@@ -8,7 +8,7 @@ const generateTokens = async (user: any) => {
             userId: user._id.toString()
         };
 
-        const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET, { expiresIn: process.env.ACCESS_EXPIRE });
+        const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET, { expiresIn: process.env.ACCESS_EXPIRE }); //
         const refreshToken = jwt.sign(payload, process.env.REFRESH_SECRET, { expiresIn: process.env.REFRESH_EXPIRE });
 
         const userToken = await UserToken.findOne({ userId: user._id });

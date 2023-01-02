@@ -12,8 +12,7 @@ import {
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, EMPTY, take } from 'rxjs';
-import { AuthService } from '../../services/auth.service';
-import { GlobalService } from '../../services/global.service';
+import { AuthService, GlobalService } from '@portfolio/ui-components';
 import { AuthForm, AuthFormValue } from '@portfolio/interfaces';
 
 @Component({

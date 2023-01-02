@@ -7,8 +7,8 @@ const SleepDataSchema: Schema = new Schema(
     {
         quality: { type: Number, required: true },
         dateOfSleep: { type: Date, required: true },
-        wentToBedAt: { type: String, required: true },
-        wokeUpAt: { type: String, required: true },
+        wentToBedAt: { type: Number, required: true },
+        wokeUpAt: { type: Number, required: true },
         mood: { type: Number, required: false },
         description: { type: String, required: false },
         user: { type: Schema.Types.ObjectId, required: true, ref: 'User' }

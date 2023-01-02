@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { lastValueFrom } from 'rxjs';
-import { AuthService } from '../services/auth.service';
 import { UserTokens } from '@portfolio/interfaces';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
     providedIn: 'root'
@@ -34,10 +34,6 @@ export class AuthGuard implements CanActivate {
             this.router.navigateByUrl('/projects/authentication');
         }
 
-        // if (!isAuthenticated) {
-        //     this.toastr.error('You are not authenicated');
-        //     this.router.navigateByUrl('/projects/authentication');
-        // }
         return isRefreshSuccess;
     }
 

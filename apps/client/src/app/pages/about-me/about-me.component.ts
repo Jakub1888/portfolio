@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef } from '@angular/core';
 import { Book, Logo } from '@portfolio/interfaces';
-import { GlobalService } from '../../services/global.service';
+import { GlobalService } from '@portfolio/ui-components';
 import { books, logos } from '../static-lists';
 
 @Component({

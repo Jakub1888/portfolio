@@ -1,20 +1,32 @@
+@import '../../../../../../apps/client/src/app/styles/variables.scss';
+@import '../../../../../../apps/client/src/app/styles/mixins.scss';
 :host {
     width: 100%;
 
     .sleep-tracker-nav {
         height: 3em;
         padding: 1em;
+        margin-bottom: 1em;
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        border-bottom: 1px solid #000;
+        border-bottom: 2px solid $st5;
     }
 
     .nav-list {
         display: flex;
 
         .nav-list-item {
-            padding-right: 1em;
+            padding-right: 1.2em;
+        }
+
+        .nav-link {
+            font-weight: 700;
+            color: $st5;
+        }
+
+        .active {
+            color: lighten($st5, 25%);
         }
     }
 }

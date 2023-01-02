@@ -16,7 +16,7 @@ const getNewToken = async (req: Request, res: Response): Promise<void> => {
                     expiresIn: process.env.ACCESS_EXPIRE
                 });
 
-                res.status(200).json({
+                return res.status(200).json({
                     accessToken,
                     message: 'Access token created successfully'
                 });

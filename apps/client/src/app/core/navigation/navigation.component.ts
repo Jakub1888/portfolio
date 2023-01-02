@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Link } from '@portfolio/interfaces';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../../services/auth.service';
-import { GlobalService } from '../../services/global.service';
+import { AuthService, GlobalService } from '@portfolio/ui-components';
 
 @Component({
     selector: 'portfolio-navigation',

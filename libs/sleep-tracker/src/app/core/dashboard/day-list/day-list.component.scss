@@ -1,0 +1,68 @@
+@import '../../../../../../../apps/client/src/app/styles/variables.scss';
+@import '../../../../../../../apps/client/src/app/styles/mixins.scss';
+
+:host {
+    .day-select {
+        width: 50em;
+        @include flex-positioning(column, center, center);
+    }
+
+    .list-heading {
+        text-align: center;
+        font-size: 2em;
+        font-weight: 800;
+        padding: 0.8em 0 0 0;
+    }
+
+    .scrolling-wrapper {
+        width: 100%;
+
+        .card {
+            cursor: pointer;
+        }
+
+        ::ng-deep .mdc-evolution-chip-set__chips {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+    }
+
+    .day-select-inputs {
+        padding-top: 0.5em;
+        @include flex-positioning(row, center, center);
+    }
+
+    .center {
+        padding-left: 6em;
+    }
+
+    .specific-date-selector {
+        padding-left: 1em;
+    }
+
+    .inp-label {
+        color: $st1;
+        font-weight: 700;
+    }
+
+    ::ng-deep .mat-mdc-select-value,
+    input,
+    textarea {
+        color: #e0e4ea !important;
+    }
+
+    ::ng-deep .mdc-text-field {
+        border-radius: 1em;
+        font-weight: 800;
+        background-color: $st2;
+    }
+
+    ::ng-deep .mdc-text-field--focused {
+        outline: 2px solid $st5;
+    }
+
+    ::ng-deep .mdc-line-ripple {
+        display: none;
+    }
+}

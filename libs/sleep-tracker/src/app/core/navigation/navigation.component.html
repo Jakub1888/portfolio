@@ -1,10 +1,18 @@
 <nav class="sleep-tracker-nav">
     <ul class="nav-list">
         <li class="nav-list-item">
-            <a routerLink="./" class="nav-link">Home</a>
+            <a routerLink="./" class="nav-link" [ngClass]="{ active: !viewingChildRoute }">Home</a>
         </li>
         <li class="nav-list-item">
-            <a [routerLink]="[{ outlets: { st: ['form'] } }]" class="nav-link">Form</a>
+            <a [routerLink]="[{ outlets: { st: ['form'] } }]" class="nav-link" routerLinkActive="active">Form</a>
+        </li>
+        <li class="nav-list-item">
+            <a [routerLink]="[{ outlets: { st: ['list'] } }]" class="nav-link" routerLinkActive="active">List</a>
+        </li>
+        <li class="nav-list-item">
+            <a [routerLink]="[{ outlets: { st: ['averages'] } }]" class="nav-link" routerLinkActive="active"
+                >Averages</a
+            >
         </li>
     </ul>
 </nav>

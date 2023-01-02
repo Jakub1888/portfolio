@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from '../core/auth/auth.component';
 import { NotFoundComponent } from '../errors/not-found/not-found.component';
-import { AuthGuard } from '../guards/auth.guard';
-import { LoggedInGuard } from '../guards/logged-in.guard';
+import { AuthGuard } from '@portfolio/ui-components';
+import { LoggedInGuard } from '@portfolio/ui-components';
 import { AboutMeComponent } from '../pages/about-me/about-me.component';
 import { HomeComponent } from '../pages/home/home.component';
 import { ProjectsComponent } from '../pages/projects/projects.component';
@@ -31,12 +31,6 @@ const routes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         loadChildren: () => import('@portfolio/sleep-tracker').then((m) => m.SleepTrackerModule)
-    },
-    {
-        path: '',
-        runGuardsAndResolvers: 'always',
-        canActivate: [AuthGuard],
-        children: []
     },
     { path: 'not-found', component: NotFoundComponent },
     { path: '**', component: NotFoundComponent }

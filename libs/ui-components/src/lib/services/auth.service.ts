@@ -10,14 +10,20 @@ export class AuthService {
     authUrl = '/api/auth';
     private _currentUserSource = new ReplaySubject<UserTokens>(1);
     currentUser$ = this._currentUserSource.asObservable();
+    refreshTokenTimeout!: any;
 
     constructor(private readonly http: HttpClient) {}
+
+    get userTokens(): UserTokens {
+        return localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '') : null;
+    }
 
     register(userCredentials: UserAuth): Observable<void> {
         return this.http.post<UserTokens>(this.authUrl + '/register', userCredentials).pipe(
             map((userTokens: UserTokens) => {
                 if (userTokens) {
                     this.setUserTokens(userTokens);
+                    this.startRefreshTokenTimer();
                 }
             })
         );
@@ -28,19 +34,35 @@ export class AuthService {
             map((userTokens: UserTokens) => {
                 if (userTokens) {
                     this.setUserTokens(userTokens);
+                    this.startRefreshTokenTimer();
                 }
             })
         );
     }
 
-    refreshToken(token: string): Observable<any> {
-        return this.http.post(this.authUrl + '/refreshToken', token);
+    refreshToken(): Observable<unknown> {
+        const tokens = this.userTokens;
+        if (!tokens) {
+            return of({});
+        }
+
+        return this.http.post(this.authUrl + '/refreshToken', { refreshToken: tokens?.refreshToken }).pipe(
+            map((token: any) => {
+                const { userId, refreshToken } = this.userTokens || {};
+                const tokenModel = { userId, refreshToken, accessToken: token.accessToken };
+
+                this.setUserTokens(tokenModel);
+                this.startRefreshTokenTimer();
+                return token;
+            })
+        );
     }
 
     logout(): Observable<any> {
         if (this.userTokens) {
             localStorage.removeItem('user');
         }
+        this.stopRefreshTokenTimer();
         return this.http.delete(this.authUrl + '/logout');
     }
 
@@ -69,7 +91,16 @@ export class AuthService {
         return true;
     }
 
-    get userTokens(): UserTokens {
-        return localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '') : null;
+    private startRefreshTokenTimer(): void {
+        const tokens = this.userTokens;
+        const expiry = JSON.parse(window.atob(tokens?.accessToken.split('.')[1])).exp;
+
+        const expires = new Date(expiry * 1000);
+        const timeout = expires.getTime() - Date.now() - 60 * 1000;
+        this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
+    }
+
+    private stopRefreshTokenTimer(): void {
+        clearTimeout(this.refreshTokenTimeout);
     }
 }

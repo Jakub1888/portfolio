@@ -23,7 +23,7 @@ export const connectDB = async () => {
             retryWrites: true,
             w: 'majority'
         });
-        Logging.info('connected');
+        Logging.info('Connected');
         StartServer();
     } catch (error) {
         Logging.error('Unable to connect');
@@ -68,12 +68,10 @@ const StartServer = () => {
     router.use('/api/sleepData', isAuthenticated, sleepDataRoutes);
 
     /** Healthcheck */
-    router.get('/api/ping', (req: Request, res: Response, next: NextFunction) =>
-        res.status(200).json({ message: 'pong' })
-    );
+    router.get('/api/ping', (req: Request, res: Response) => res.status(200).json({ message: 'pong' }));
 
     /** Error handling */
-    router.use((req: Request, res: Response, next: NextFunction) => {
+    router.use((req: Request, res: Response) => {
         const error = new Error('not found');
         Logging.error(error);
 

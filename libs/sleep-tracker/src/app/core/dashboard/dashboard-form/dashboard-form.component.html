@@ -1,48 +1,58 @@
 <section>
-    <form class="sleep-tracker-form" [formGroup]="sleepTrackerForm" (submit)="onSubmit()">
+    <h2 class="form-heading">{{ editingSleepData ? 'Editing' : 'Adding' }} Sleep Data</h2>
+    <form class="sleep-tracker-form" [formGroup]="sleepTrackerForm" (submit)="onSubmit()" *ngIf="!loading">
         <div class="form-col">
-            <mat-form-field appearance="outline">
-                <mat-label>Date of sleep</mat-label>
+            <mat-form-field>
+                <mat-label class="inp-label">Date of sleep</mat-label>
                 <input formControlName="dateOfSleep" matInput [matDatepicker]="picker" />
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Bed time</mat-label>
-                <input formControlName="wentToBedAt" type="time" matInput placeholder="22:00" />
-            </mat-form-field>
+            <div>
+                <mat-form-field class="half-input left">
+                    <mat-label class="inp-label">Bed time</mat-label>
+                    <input formControlName="wentToBedAt" type="time" matInput placeholder="22:00" />
+                </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Wake up time</mat-label>
-                <input formControlName="wokeUpAt" type="time" matInput placeholder="06:00" />
-            </mat-form-field>
+                <mat-form-field class="half-input">
+                    <mat-label class="inp-label">Wake up time</mat-label>
+                    <input formControlName="wokeUpAt" type="time" matInput placeholder="06:00" />
+                </mat-form-field>
+            </div>
         </div>
 
         <div class="form-col">
-            <mat-form-field appearance="outline">
-                <mat-label>Sleep quality</mat-label>
-                <mat-select formControlName="quality">
-                    <mat-option *ngFor="let quality of qualities" [value]="quality">
-                        {{ quality }}
-                    </mat-option>
-                </mat-select>
-                <mat-hint>1 = poor, 5 = excellent</mat-hint>
-            </mat-form-field>
+            <div>
+                <mat-form-field class="half-input left">
+                    <mat-label class="inp-label">Quality</mat-label>
+                    <mat-select
+                        formControlName="quality"
+                        matTooltip="Quality of your sleep, 1 being poor and 5 excellent"
+                    >
+                        <mat-option *ngFor="let quality of qualities" [value]="quality">
+                            {{ quality }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Mood after waking up</mat-label>
-                <mat-select formControlName="mood">
-                    <mat-option *ngFor="let quality of qualities" [value]="quality">
-                        {{ quality }}
-                    </mat-option>
-                </mat-select>
-                <mat-hint>1 = poor, 5 = excellent</mat-hint>
-            </mat-form-field>
+                <mat-form-field class="half-input">
+                    <mat-label class="inp-label">Mood</mat-label>
+                    <mat-select
+                        formControlName="mood"
+                        matTooltip="Your mood after waking up, 1 being poor and 5 excellent"
+                    >
+                        <mat-option *ngFor="let quality of qualities" [value]="quality" class="xd">
+                            {{ quality }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Description</mat-label>
+            <mat-form-field floatLabel="always">
+                <mat-label class="inp-label">Description</mat-label>
                 <textarea
+                    matTooltip="Description of your sleep"
                     formControlName="description"
                     matInput
                     cdkTextareaAutosize
@@ -56,5 +66,11 @@
         <div class="form-btn">
             <button button type="submit" color="secondary">Submit</button>
         </div>
+
+        <button *ngIf="editingSleepData" button type="button" color="primary" (click)="cancelEditing()">
+            Cancel Editing
+        </button>
     </form>
+
+    <div *ngIf="loading">...Loading</div>
 </section>

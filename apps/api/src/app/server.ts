@@ -68,7 +68,7 @@ const StartServer = () => {
     router.use('/api/sleepData', isAuthenticated, sleepDataRoutes);
 
     /** Healthcheck */
-    router.get('/api/ping', (req: Request, res: Response) => res.status(200).json({ message: 'pong' }));
+    router.get('/', (req: Request, res: Response) => res.status(200).json({ message: 'pong' }));
 
     /** Error handling */
     router.use((req: Request, res: Response) => {

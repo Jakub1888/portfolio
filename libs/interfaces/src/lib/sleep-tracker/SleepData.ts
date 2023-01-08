@@ -17,4 +17,5 @@ export interface SleepData {
     mood: number;
     description: string;
     user?: string;
+    _id?: string;
 }

@@ -1,1 +1,27 @@
-<button (click)="loadAveragesForSleepData()">xd</button>
+<section>
+    <h2 class="st-heading">Averages of your sleep data</h2>
+    <div *ngIf="averages$ | async as averages; else loading">
+        <mat-form-field class="half-input left">
+            <mat-label class="inp-label"></mat-label>
+            <mat-select [formControl]="enteredValues">
+                <mat-option [value]="7"> Last 7 entered values </mat-option>
+                <mat-option [value]="30"> Last 30 entered values </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <h3>
+            Averages for last {{ limit }} entered values between dates
+            {{ averages.firstAndLast[0].last | date: 'mediumDate' }} and
+            {{ averages.firstAndLast[0].first | date: 'mediumDate' }}
+        </h3>
+
+        <div class="averages-summary">
+            <span>Sleep quality: {{ averages.averages[0].quality }}</span>
+            <span>Mood after waking up: {{ averages.averages[0].mood }} </span>
+            <span>Bed time: {{ convertToHourString(averages.averages[0].wentToBedAt) }}</span>
+            <span>Wake up time: {{ convertToHourString(averages.averages[0].wokeUpAt) }}</span>
+            <span>Time in bed: {{ getTimeInBed(averages.averages[0].awakeTime) }}</span>
+        </div>
+    </div>
+    <ng-template #loading>...Loading</ng-template>
+</section>

@@ -68,7 +68,7 @@ const getAllSleepData = async (req: Req, res: Response) => {
 
 const getAverageSleepData = async (req: Req, res: Response) => {
     const ObjectId = mongoose.Types.ObjectId;
-    const limit = req.body.limit ? req.body.limit : 7;
+    const limit = req.params.limit ? Number(req.params.limit) : 7;
 
     const averages = await SleepData.aggregate([
         {
@@ -103,7 +103,9 @@ const getAverageSleepData = async (req: Req, res: Response) => {
             $group: {
                 _id: null,
                 first: { $first: '$dateOfSleep' },
-                last: { $last: '$dateOfSleep' }
+                last: { $last: '$dateOfSleep' },
+                limit: { $first: limit },
+                count: { $count: {} }
             }
         }
     ]);

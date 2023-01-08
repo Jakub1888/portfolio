@@ -1,75 +1,102 @@
 <section>
-    <h2 class="form-heading">{{ editingSleepData ? 'Editing' : 'Adding' }} Sleep Data</h2>
-    <form class="sleep-tracker-form" [formGroup]="sleepTrackerForm" (submit)="onSubmit()" *ngIf="!loading">
-        <div class="form-col">
-            <mat-form-field>
-                <mat-label class="inp-label">Date of sleep</mat-label>
-                <input formControlName="dateOfSleep" matInput [matDatepicker]="picker" />
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-
-            <div>
-                <mat-form-field class="half-input left">
-                    <mat-label class="inp-label">Bed time</mat-label>
-                    <input formControlName="wentToBedAt" type="time" matInput placeholder="22:00" />
+    <h2 class="st-heading">{{ editingSleepData ? 'Editing' : 'Adding' }} Sleep Data</h2>
+    <form
+        class="sleep-tracker-form"
+        [formGroup]="sleepTrackerForm"
+        (submit)="sleepTrackerForm.valid && onSubmit()"
+        *ngIf="!loading"
+    >
+        <div style="display: flex">
+            <div class="form-col">
+                <mat-form-field>
+                    <mat-label class="inp-label">Date of sleep</mat-label>
+                    <input formControlName="dateOfSleep" matInput [matDatepicker]="picker" />
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="sleepTrackerForm.get('dateOfSleep')?.hasError('required')">
+                        Date of sleep in format MM/DD/YYYY is <strong>required</strong>
+                    </mat-error>
                 </mat-form-field>
 
-                <mat-form-field class="half-input">
-                    <mat-label class="inp-label">Wake up time</mat-label>
-                    <input formControlName="wokeUpAt" type="time" matInput placeholder="06:00" />
+                <div>
+                    <mat-form-field class="half-input left">
+                        <mat-label class="inp-label">Bed time</mat-label>
+                        <input formControlName="wentToBedAt" type="time" matInput placeholder="22:00" />
+                        <mat-error class="time-error" *ngIf="sleepTrackerForm.get('wentToBedAt')?.hasError('required')"
+                            >Bed time in format HH:MM is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="half-input">
+                        <mat-label class="inp-label">Wake up time</mat-label>
+                        <input formControlName="wokeUpAt" type="time" matInput placeholder="06:00" />
+                        <mat-error class="time-error" *ngIf="sleepTrackerForm.get('wokeUpAt')?.hasError('required')"
+                            >Wake up time in format HH:MM is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="form-col">
+                <div>
+                    <mat-form-field class="half-input left">
+                        <mat-label class="inp-label">Quality</mat-label>
+                        <mat-select
+                            formControlName="quality"
+                            matTooltip="Quality of your sleep, 1 being poor and 5 excellent"
+                        >
+                            <mat-option *ngFor="let quality of qualities" [value]="quality">
+                                {{ quality }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="half-input">
+                        <mat-label class="inp-label">Mood</mat-label>
+                        <mat-select
+                            formControlName="mood"
+                            matTooltip="Your mood after waking up, 1 being poor and 5 excellent"
+                        >
+                            <mat-option *ngFor="let quality of qualities" [value]="quality" class="xd">
+                                {{ quality }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field floatLabel="always">
+                    <mat-label class="inp-label">Description</mat-label>
+                    <textarea
+                        matTooltip="Description of your sleep"
+                        formControlName="description"
+                        matInput
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="1"
+                        cdkAutosizeMaxRows="5"
+                    ></textarea>
+                    <mat-error *ngIf="sleepTrackerForm.get('description')?.hasError('maxlength')"
+                        >Description can contain <strong>200</strong> characters at most
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
 
-        <div class="form-col">
-            <div>
-                <mat-form-field class="half-input left">
-                    <mat-label class="inp-label">Quality</mat-label>
-                    <mat-select
-                        formControlName="quality"
-                        matTooltip="Quality of your sleep, 1 being poor and 5 excellent"
-                    >
-                        <mat-option *ngFor="let quality of qualities" [value]="quality">
-                            {{ quality }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+        <div class="form-btns">
+            <button
+                button
+                type="{{ !editingSleepData ? 'submit' : 'button' }}"
+                color="{{ !editingSleepData ? 'primary' : 'secondary' }}"
+                (click)="!editingSleepData ? '' : openUpdateDialog()"
+                [disabled]="!(sleepTrackerForm.valid && sleepTrackerForm.dirty)"
+            >
+                {{ !editingSleepData ? 'Save' : 'Update' }} Sleep Data
+            </button>
 
-                <mat-form-field class="half-input">
-                    <mat-label class="inp-label">Mood</mat-label>
-                    <mat-select
-                        formControlName="mood"
-                        matTooltip="Your mood after waking up, 1 being poor and 5 excellent"
-                    >
-                        <mat-option *ngFor="let quality of qualities" [value]="quality" class="xd">
-                            {{ quality }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-
-            <mat-form-field floatLabel="always">
-                <mat-label class="inp-label">Description</mat-label>
-                <textarea
-                    matTooltip="Description of your sleep"
-                    formControlName="description"
-                    matInput
-                    cdkTextareaAutosize
-                    #autosize="cdkTextareaAutosize"
-                    cdkAutosizeMinRows="1"
-                    cdkAutosizeMaxRows="5"
-                ></textarea>
-            </mat-form-field>
+            <button *ngIf="editingSleepData" button type="button" color="primary" (click)="cancelEditing()">
+                Cancel Editing
+            </button>
         </div>
-
-        <div class="form-btn">
-            <button button type="submit" color="secondary">Submit</button>
-        </div>
-
-        <button *ngIf="editingSleepData" button type="button" color="primary" (click)="cancelEditing()">
-            Cancel Editing
-        </button>
     </form>
 
     <div *ngIf="loading">...Loading</div>

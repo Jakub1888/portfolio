@@ -1,0 +1,8 @@
+@import '../../../../../../../apps/client/src/app/styles/variables.scss';
+@import '../../../../../../../apps/client/src/app/styles/mixins.scss';
+
+:host {
+    .averages-summary {
+        @include flex-positioning(column, center, center);
+    }
+}

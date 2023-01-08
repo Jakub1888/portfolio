@@ -37,7 +37,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                             this.toastr.error(error.error.message, `${error.status}: ${error.statusText}`);
                             break;
                         case 422:
-                            this.toastr.error(`${error.status}: ${error.statusText}`);
+                            this.toastr.error(`${error.error.error.details[0].message}`);
                             break;
                         default:
                             this.toastr.error('Something unexpected went wrong');

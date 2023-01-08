@@ -8,3 +8,5 @@ export * from './lib/general/ButtonProps';
 export * from './lib/general/Req';
 export * from './lib/general/AuthForm';
 export * from './lib/sleep-tracker/SleepData';
+export * from './lib/sleep-tracker/WeekDay';
+export * from './lib/sleep-tracker/Averages';

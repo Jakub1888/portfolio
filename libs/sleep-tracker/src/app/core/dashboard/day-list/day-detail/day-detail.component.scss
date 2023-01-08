@@ -1,0 +1,51 @@
+@import '../../../../../../../../apps/client/src/app/styles/variables.scss';
+@import '../../../../../../../../apps/client/src/app/styles/mixins.scss';
+
+:host {
+    .detail-header {
+        @include flex-positioning(row, center, center);
+        padding: 0.8em 0;
+    }
+
+    .data-summary {
+        width: 35em;
+    }
+
+    .stat-title {
+        width: 12em;
+        font-weight: 800;
+    }
+
+    .stat-value {
+        font-weight: 600;
+        color: $st5;
+    }
+
+    .description {
+        padding-left: 4px;
+    }
+
+    .action-btns {
+        margin-left: 1em;
+
+        .action-btn {
+            border: none;
+            border-radius: 20px;
+            background-color: $st2;
+            width: 2.1em;
+            height: 2.1em;
+            margin-right: 0.4em;
+            cursor: pointer;
+        }
+
+        .mat-icon {
+            font-size: 1.3em;
+            padding: 5px 4px 0 0;
+            color: $st5;
+        }
+    }
+
+    .description-text {
+        max-width: 24em;
+    }
+}

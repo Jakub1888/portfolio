@@ -1,4 +1,4 @@
-import { IUserWithSleepDataCollection } from '@portfolio/interfaces';
+import { IUserWithSleepDataCollection, SleepData } from '@portfolio/interfaces';
 import { NextFunction, Request, Response } from 'express';
 import Joi, { ObjectSchema } from 'joi';
 import Logging from '../utils/logging';
@@ -23,6 +23,15 @@ const userValidation = {
         .required()
 };
 
+const sleepDataValidation = {
+    dateOfSleep: Joi.date().required(),
+    wentToBedAt: Joi.number().required(),
+    wokeUpAt: Joi.number().required(),
+    mood: Joi.number().required(),
+    quality: Joi.number().required(),
+    description: Joi.string().max(200).allow('').optional()
+};
+
 export const Schemas = {
     user: {
         register: Joi.object<IUserWithSleepDataCollection>({
@@ -40,6 +49,13 @@ export const Schemas = {
         }),
         token: Joi.object<any>({
             refreshToken: Joi.string().required()
+        })
+    },
+    sleepData: {
+        create: Joi.object<SleepData>(sleepDataValidation),
+        update: Joi.object<SleepData>({ ...sleepDataValidation, _id: Joi.string().required() }),
+        delete: Joi.object<{ _id: string }>({
+            _id: Joi.string().required()
         })
     }
 };

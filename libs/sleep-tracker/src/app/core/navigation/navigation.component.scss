@@ -27,6 +27,7 @@
 
         .active {
             color: lighten($st5, 25%);
+            pointer-events: none;
         }
     }
 }

@@ -7,24 +7,33 @@
         @include flex-positioning(column, center, center);
     }
 
-    .list-heading {
-        text-align: center;
-        font-size: 2em;
-        font-weight: 800;
-        padding: 0.8em 0 0 0;
+    .st-heading {
+        padding-bottom: 0;
     }
 
     .scrolling-wrapper {
-        width: 100%;
+        width: 25em;
+        height: 3em;
+        margin-left: 1em;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        @include flex-positioning(row, flex-start, center);
 
-        .card {
+        .day-btn {
+            border: none;
+            border-radius: 1em;
+            margin-left: 0.2em;
+            color: $st5;
+            font-weight: 700;
+            padding: 0.2em 0.5em;
+            background-color: $st2;
             cursor: pointer;
         }
 
-        ::ng-deep .mdc-evolution-chip-set__chips {
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: auto;
+        .active {
+            background-color: $st5;
+            color: $st2;
+            pointer-events: none;
         }
     }
 
@@ -33,8 +42,8 @@
         @include flex-positioning(row, center, center);
     }
 
-    .center {
-        padding-left: 6em;
+    .mat-mdc-form-field {
+        padding-top: 1em;
     }
 
     .specific-date-selector {

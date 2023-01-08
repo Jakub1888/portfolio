@@ -18,7 +18,7 @@ import { ButtonProps } from '@portfolio/interfaces';
 export class ButtonComponent implements ButtonProps {
     @Input() iconAlign: 'left' | 'right' = 'left';
 
-    @Input() color!: 'primary' | 'secondary';
+    @Input() color!: string;
 
     @Input()
     set outline(value: boolean) {

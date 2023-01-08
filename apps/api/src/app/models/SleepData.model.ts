@@ -1,7 +1,7 @@
 import { SleepData } from '@portfolio/interfaces';
 import mongoose, { Document, Schema } from 'mongoose';
 
-export interface ISleepDataModel extends SleepData, Document {}
+export interface ISleepDataModel extends Omit<SleepData, '_id'>, Document {}
 
 const SleepDataSchema: Schema = new Schema(
     {

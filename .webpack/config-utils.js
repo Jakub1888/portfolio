@@ -18,14 +18,6 @@ const withWatchPoll = (config) => {
         };
     }
 
-    config.plugins = [
-        new ForkTsCheckerWebpackPlugin({
-            typescript: {
-                memoryLimit: 4096
-            }
-        })
-    ];
-
     return config;
 };
 

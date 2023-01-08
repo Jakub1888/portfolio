@@ -8,7 +8,7 @@
         "start api": "nx serve api",
         "build": "nx build api client",
         "client:dev:docker": "nx serve --host=0.0.0.0 --poll 5000",
-        "api:dev:docker": "nx serve api --host=0.0.0.0 --port=4311",
+        "api:dev:docker": "nx serve api",
         "many": "nx run-many --target=serve --projects=client,api",
         "test": "nx test"
     },

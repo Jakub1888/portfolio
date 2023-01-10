@@ -80,13 +80,14 @@ a {
     text-decoration: none;
 }
 
-.day-select {
+.day-select,
+.sleep-tracker {
     ::-webkit-scrollbar {
         height: 12px;
         cursor: not-allowed;
     }
     ::-webkit-scrollbar-track {
-        margin-left: 4px;
+        margin-left: 2px;
         border-radius: 1em;
         background: #f1f1f1;
     }

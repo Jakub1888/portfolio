@@ -1,5 +1,5 @@
-@import '../../../../../../apps/client/src/app/styles/variables.scss';
-@import '../../../../../../apps/client/src/app/styles/mixins.scss';
+@import '../../styles/shared.scss';
+
 :host {
     section {
         @include flex-positioning(row, center, center);
@@ -9,7 +9,8 @@
 
     .wrapper {
         width: 51em;
-        height: 32em;
+        height: 50vh;
+        overflow-y: auto;
         border-radius: 1em;
         @include flex-positioning(column, none, center);
         background-color: $st4;

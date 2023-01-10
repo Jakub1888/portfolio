@@ -1,24 +1,9 @@
-@import '../../../../../../../../apps/client/src/app/styles/variables.scss';
-@import '../../../../../../../../apps/client/src/app/styles/mixins.scss';
+@import '../../../../styles/shared.scss';
 
 :host {
     .detail-header {
         @include flex-positioning(row, center, center);
         padding: 0.8em 0;
-    }
-
-    .data-summary {
-        width: 35em;
-    }
-
-    .stat-title {
-        width: 12em;
-        font-weight: 800;
-    }
-
-    .stat-value {
-        font-weight: 600;
-        color: $st5;
     }
 
     .description {

@@ -1,0 +1,16 @@
+@import '../../../../../apps/client/src/app/styles/variables.scss';
+@import '../../../../../apps/client/src/app/styles/mixins.scss';
+
+.stat-title {
+    width: 12em;
+    font-weight: 800;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: $st5;
+}
+
+.data-summary {
+    width: 35em;
+}

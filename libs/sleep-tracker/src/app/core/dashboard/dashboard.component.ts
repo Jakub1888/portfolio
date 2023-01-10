@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Event, NavigationEnd, Route, Router } from '@angular/router';
+import { Event, NavigationEnd, Router } from '@angular/router';
 
 @Component({
     selector: 'st-home',
     template: `
-        <section>
+        <section class="sleep-tracker">
             <div class="wrapper">
                 <st-navigation></st-navigation>
                 <div class="tracker-intro" *ngIf="!viewingChildRoute">

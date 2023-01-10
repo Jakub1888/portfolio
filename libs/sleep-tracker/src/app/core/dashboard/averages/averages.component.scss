@@ -1,8 +1,18 @@
-@import '../../../../../../../apps/client/src/app/styles/variables.scss';
-@import '../../../../../../../apps/client/src/app/styles/mixins.scss';
+@import '../../../styles/shared.scss';
 
 :host {
     .averages-summary {
         @include flex-positioning(column, center, center);
+    }
+
+    .data-summary {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .averages-intro {
+        @include flex-positioning(row, center, center);
+        width: 90%;
+        margin: 0 auto;
     }
 }
